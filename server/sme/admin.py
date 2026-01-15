@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Dre, Ue, Turma, Aluno
+from .models import Dre, Ue
 
 
 @admin.register(Dre)
@@ -14,17 +14,3 @@ class UeAdmin(admin.ModelAdmin):
     list_display = ('codigo_ue', 'nome', 'dre')
     list_filter = ('codigo_ue', 'nome', 'dre')
     search_fields = ('codigo_ue', 'nome')
-    
-
-@admin.register(Turma)
-class TurmaAdmin(admin.ModelAdmin):
-    list_display = ('codigo_turma', 'nome', 'ano_letivo')
-    list_filter = ('codigo_turma',)
-    search_fields = ('codigo_turma',)
-
-
-@admin.register(Aluno)
-class AlunosAdmin(admin.ModelAdmin):
-    list_display = ('nome', 'cpf', 'endereco')
-    list_filter = ('nome', 'cpf')
-    search_fields = ('nome', 'cpf')

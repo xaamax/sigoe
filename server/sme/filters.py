@@ -1,5 +1,5 @@
 from dj_rql.filter_cls import AutoRQLFilterClass
-from .models import Dre, Ue, Turma, Aluno
+from .models import Dre, Ue
 
 
 class DreFilterClass(AutoRQLFilterClass):
@@ -8,9 +8,3 @@ class DreFilterClass(AutoRQLFilterClass):
 
 class UeFilterClass(AutoRQLFilterClass):
     MODEL = Ue
-
-class TurmaFilterClass(AutoRQLFilterClass):
-    MODEL = Turma
-
-class AlunoFilterClass(AutoRQLFilterClass):
-    MODEL = Aluno

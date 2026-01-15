@@ -14,5 +14,6 @@ urlpatterns = [
 
     path('api/v1/', include('authentication.urls')),
     path('api/v1/', include('sme.urls')),
+    path('api/v1/', include('gestao.urls')),
     path('', admin.site.urls),
 ]

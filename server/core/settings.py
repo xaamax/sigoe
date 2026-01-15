@@ -25,6 +25,7 @@ INSTALLED_APPS = [
 
     'authentication',
     'sme',
+    'gestao',
 ]
 
 MIDDLEWARE = [
@@ -105,8 +106,10 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-lock",
 
-        "sme.Aluno": "fas fa-users",
-        "sme.Turma": "fas fa-book",
+        "gestao.Aluno": "fas fa-users",
+        "gestao.Turma": "fas fa-book",
+        "gestao.Matricula": "fas fa-graduation-cap",
+        "gestao.Ocorrencia": "fas fa-exclamation-triangle",
     },
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",

@@ -22,9 +22,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_simplejwt',
     'drf_spectacular',
-    
+
     'authentication',
-    'alunos',
+    'sme',
 ]
 
 MIDDLEWARE = [
@@ -105,7 +105,8 @@ JAZZMIN_SETTINGS = {
         "auth.user": "fas fa-user",
         "auth.Group": "fas fa-lock",
 
-        "alunos.Aluno": "fas fa-users",
+        "sme.Aluno": "fas fa-users",
+        "sme.Turma": "fas fa-book",
     },
     "default_icon_parents": "fas fa-chevron-circle-right",
     "default_icon_children": "fas fa-circle",

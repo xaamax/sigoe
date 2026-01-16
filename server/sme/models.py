@@ -26,4 +26,4 @@ class Ue(models.Model):
         verbose_name_plural = 'UEs'
 
     def __str__(self):
-        return f'{self.codigo_ue} - {self.nome}'
+        return self.nome

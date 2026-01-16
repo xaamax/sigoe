@@ -1,16 +1,31 @@
-import { Outlet } from "react-router-dom";
-import Navbar from "@/components/navbar";
-import Wrapper from "@/components/wrapper";
+import { Outlet } from 'react-router-dom'
+import useIsCollapsed from '@/hooks/use-is-collapsed'
+import Sidebar from "@/components/sidebar";
+import SkipToMain from '@/components/skip-to-main';
+// import Wrapper from "./wrapper";
+// import Sidebar from './sidebar'
+// import useIsCollapsed from '@/hooks/use-is-collapsed'
+// import SkipToMain from './skip-to-main'
 
 const ProtectedRoute = () => {
-  return (
-    <main>
-      <Wrapper>
-        <Navbar />
-        <Outlet />
-      </Wrapper>
-    </main>
-  );
-};
+  const [isCollapsed, setIsCollapsed] = useIsCollapsed()
 
-export default ProtectedRoute;
+  return (
+    <>
+      <div className='bg-background relative h-full overflow-hidden'>
+        <SkipToMain />
+        <Sidebar isCollapsed={isCollapsed} setIsCollapsed={setIsCollapsed} />
+        <main
+          id='content'
+          className={`overflow-x-hidden pt-16 transition-[margin] md:overflow-y-hidden md:pt-0 ${
+            isCollapsed ? 'md:ml-14' : 'md:ml-64'
+          } h-full`}
+        >
+          <Outlet />
+        </main>
+      </div>
+    </>
+  )
+}
+
+export default ProtectedRoute

@@ -1,36 +1,28 @@
-import { createBrowserRouter, Navigate } from 'react-router-dom';
-import Login from '@/pages/auth/login';
-import ProtectedRoute from './protected-route';
-import Home from '@/pages/inicio/home';
-import Ocorrencias from '@/pages/ocorrencias/ocorrencias';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <ProtectedRoute />,
-    children: [
-      {
-        index: true,
-        element: <Navigate to="/home" replace />,
-      },
-      {
-        path: 'home',
-        element: <Home />,
-      },
-      {
-        path: 'ocorrencias',
-        element: <Ocorrencias />,
-      },
-    ],
-  },
-  { 
-    path: '/login', 
-    element: <Login /> 
-  },
-  { 
-    path: '*', 
-    element: <Navigate to="/home" replace /> 
-  }
-]);
+import UnauthorizedError from '@/pages/errors/unauthorizad-error'
+import ProtectedRoute from './protected-route'
 
-export default router;
+import Login from '@/pages/auth/login'
+import Dashboard from '@/pages/dashboard/dashboard'
+import NotFoundError from '@/pages/errors/not-found'
+import Ocorrrencias from '@/pages/ocorrencias/ocorrencias'
+
+const RoutesConfig = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<ProtectedRoute />}>
+          <Route index element={<Navigate to='/dashboard' replace />} />
+          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/ocorrencias' element={<Ocorrrencias />} />
+        </Route>
+        <Route path='/login' element={<Login />} />
+        <Route path='/401' element={<UnauthorizedError />} />
+        <Route path='*' element={<NotFoundError />} />
+      </Routes>
+    </BrowserRouter>
+  )
+}
+
+export default RoutesConfig

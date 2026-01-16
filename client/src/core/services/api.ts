@@ -24,15 +24,15 @@ export const logout = () => {
   window.location.href = "/login";
 };
 
-const getRefreshToken = (token: string) =>
-  authService.refreshToken(token).then((resp) => resp.data);
+const getRefreshToken = (access: string) =>
+  authService.refreshToken(access).then((resp) => resp.data);
 
 const revalidateAuth = async (oldToken: string) => {
   if (!refreshTokenPromise) {
     refreshTokenPromise = getRefreshToken(oldToken)
       .then((data) => {
         refreshTokenPromise = null;
-        if (data?.token) {
+        if (data?.access) {
           setAuth(data);
         }
         return data;
@@ -53,22 +53,22 @@ api.interceptors.request.use(
 
     if (!auth) return requestConfig;
 
-    const { token, expiresIn } = auth;
+    const { access, expiresIn } = auth;
 
     const diff = dayjs().diff(dayjs(expiresIn), "seconds");
 
     if (requestConfig.headers) {
-      requestConfig.headers.Authorization = `Bearer ${token}`;
+      requestConfig.headers.Authorization = `Bearer ${access}`;
     }
 
     if (
       requestConfig.url !== URL_REFRESH_TOKEN &&
       diff >= SEGUNDOS_ANTES_EXPIRAR
     ) {
-      const refreshed = await revalidateAuth(token);
+      const refreshed = await revalidateAuth(access);
 
-      if (refreshed?.token && requestConfig.headers) {
-        requestConfig.headers.Authorization = `Bearer ${refreshed.token}`;
+      if (refreshed?.access && requestConfig.headers) {
+        requestConfig.headers.Authorization = `Bearer ${refreshed.access}`;
       }
     }
 

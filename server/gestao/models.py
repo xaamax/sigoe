@@ -2,6 +2,8 @@ from django.db import models
 from sme.models import Ue
 from core.model_base import ModelBase
 from django.contrib.auth.models import User
+from .choices import SituacaoOcorrencia, TipoOcorrencia
+
 
 class Turma(ModelBase):
     codigo_turma = models.CharField(max_length=10, unique=True, verbose_name='Código')
@@ -42,8 +44,8 @@ class Aluno(ModelBase):
 
     def __str__(self):
         return self.nome
-    
-    
+
+
 class Matricula(ModelBase):
     turma = models.ForeignKey(Turma, on_delete=models.CASCADE, verbose_name='Turma', db_column='codigo_turma')
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Aluno')
@@ -55,14 +57,14 @@ class Matricula(ModelBase):
 
     def __str__(self):
         return f'{self.aluno.nome} - {self.turma.nome} - {self.turma.ue.codigo_ue}'
-    
-    
+
+
 class Ocorrencia(ModelBase):
     matricula = models.ForeignKey(Matricula, on_delete=models.CASCADE, verbose_name='Matrícula')
-    tipo = models.IntegerField(verbose_name='Tipo')
+    tipo = models.IntegerField(choices=TipoOcorrencia.choices, verbose_name='Tipo')
     data_ocorrencia = models.DateField(verbose_name='Data da Ocorrência')
     descricao = models.TextField(verbose_name='Descrição')
-    situacao = models.IntegerField(verbose_name='Situação')
+    situacao = models.IntegerField(choices=SituacaoOcorrencia.choices, verbose_name='Situação')
     responsavel = models.OneToOneField(
         User,
         on_delete=models.PROTECT,

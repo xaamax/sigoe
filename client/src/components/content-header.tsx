@@ -1,17 +1,15 @@
-import React from "react";
-
-interface Props {
-  title: string;
-  subtitle?: string;
+interface ContentHeaderProps {
+  title: string
+  subtitle: string
 }
 
-const ContentHeader: React.FC<Props> = (props) => {
+export function ContentHeader({ title, subtitle }: ContentHeaderProps) {
   return (
-    <div>
-      <h1 className="page-title">{props.title}</h1>
-      <span>{props.subtitle}</span>
+    <div className='mb-2 flex items-center justify-between space-y-2'>
+      <div>
+        <h1 className='text-2xl font-bold tracking-tight'>{title}</h1>
+        <span className='text-sm text-gray-500 font-light'>{subtitle}</span>
+      </div>
     </div>
-  );
-};
-
-export default ContentHeader;
+  )
+}

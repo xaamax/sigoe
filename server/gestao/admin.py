@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import Turma, Aluno, Matricula, Ocorrencia
 
+
 @admin.register(Turma)
 class TurmaAdmin(admin.ModelAdmin):
     list_display = ('codigo_turma', 'nome', 'ano_letivo')
@@ -14,12 +15,13 @@ class AlunosAdmin(admin.ModelAdmin):
     list_filter = ('nome', 'cpf')
     search_fields = ('nome', 'cpf')
 
+
 @admin.register(Matricula)
 class MatriculaAdmin(admin.ModelAdmin):
     list_display = ('turma', 'aluno')
     list_filter = ('turma', 'aluno')
     search_fields = ('turma__nome', 'aluno__nome')
-    
+
 
 @admin.register(Ocorrencia)
 class OcorrenciaAdmin(admin.ModelAdmin):

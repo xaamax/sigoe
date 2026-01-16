@@ -1,7 +1,8 @@
 import type { AuthResponseDTO } from "../services/auth-service";
 
 type AuthData = {
-  token: string;
+  access: string;
+  refresh: string;
   expiresIn: string;
 };
 

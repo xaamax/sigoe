@@ -1,11 +1,15 @@
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { RouterProvider } from "react-router-dom";
-import "./index.css";
-import routes from "./routes/router";
+import ReactDOM from 'react-dom/client'
+import { StrictMode } from 'react'
+import { ThemeProvider } from './components/theme-provider'
+import '@/index.css'
+import { Toaster } from './components/ui/toaster'
+import RoutesConfig from '@/routes/router'
 
-createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <StrictMode>
-      <RouterProvider router={routes} />
+    <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
+      <RoutesConfig />
+      <Toaster />
+    </ThemeProvider>
   </StrictMode>
-);
+)

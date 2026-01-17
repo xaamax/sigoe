@@ -1,5 +1,16 @@
 export const ocorrenciaKeys = {
-  all: ["ocorrencia"] as const,
-  detail: (id: string) => [...ocorrenciaKeys.all, id] as const,
-  filters: (filters: Record<string, string | number>) => [...ocorrenciaKeys.all, ...Object.values(filters)] as const,
+  all: ["ocorrencias"] as const,
+  lists: () => [...ocorrenciaKeys.all, "list"] as const,
+  list: (filters: object) =>
+    [...ocorrenciaKeys.lists(), filters] as const,
+
+  details: () => [...ocorrenciaKeys.all, "detail"] as const,
+  detail: (id: number) =>
+    [...ocorrenciaKeys.details(), id] as const,
+};
+
+export const dreKeys = {
+  all: ["dre"] as const,
+  detail: (id: string) => [...dreKeys.all, id] as const,
+  filters: ({}) => [...dreKeys.all] as const,
 };

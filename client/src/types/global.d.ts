@@ -3,7 +3,7 @@ declare global {
 
   type Theme = "dark" | "light";
 
-  type DataType = { value: string | Record<string, unknown>; label: string };
+  type DataType = { value: string | number; label: string };
 }
 
 export {};

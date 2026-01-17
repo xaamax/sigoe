@@ -13,6 +13,7 @@ import { PopoverContent } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
 import { Popover, PopoverTrigger } from "@radix-ui/react-popover";
 import { CalendarIcon } from "lucide-react";
+import { ptBR } from "date-fns/locale";
 
 interface Props {
   label?: string;
@@ -39,8 +40,8 @@ function DateInput({
         <FormItem className="flex flex-col">
           {(label || withAsterisk) && (
             <FormLabel className="flex items-center gap-1">
-              {label}{" "}
               {withAsterisk && <span className="mt-1 text-destructive">*</span>}
+              {label}{" "}
             </FormLabel>
           )}
           <Popover>
@@ -54,7 +55,7 @@ function DateInput({
                   )}
                 >
                   {field.value ? (
-                    format(field.value, "PPP")
+                    format(field.value, "PPP", { locale: ptBR })
                   ) : (
                     <span>{placeholder}</span>
                   )}
@@ -64,6 +65,7 @@ function DateInput({
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
+                locale={ptBR}
                 mode="single"
                 selected={field.value}
                 onSelect={(e) => {

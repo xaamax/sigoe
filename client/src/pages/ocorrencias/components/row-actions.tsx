@@ -9,8 +9,15 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Edit2, Trash2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { OcorrenciaRegistroDTO } from "@/core/dto/ocorrencia-dto";
 
-export function DataTableRowActions() {
+type Props = {
+  row: OcorrenciaRegistroDTO;
+};
+
+export function DataTableRowActions({ row }: Props) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -19,18 +26,24 @@ export function DataTableRowActions() {
           className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
           <DotsHorizontalIcon className="h-4 w-4" />
-          <span className="sr-only">Open menu</span>
+          <span className="sr-only">Abrir menu</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
-        <DropdownMenuItem>Edit</DropdownMenuItem>
-        <DropdownMenuItem>Make a copy</DropdownMenuItem>
-        <DropdownMenuItem>Favorite</DropdownMenuItem>
-        <DropdownMenuSeparator />
+        <Link to={`/ocorrencias/${row?.id}`}>
+          <DropdownMenuItem>
+            Editar
+            <DropdownMenuShortcut>
+              <Edit2 className="h-4 w-4" />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          Delete
-          <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
+          Excluir
+          <DropdownMenuShortcut>
+            <Trash2 className="h-4 w-4 text-red-500" />
+          </DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -1,4 +1,5 @@
 export type ResponseBaseDTO = {
-  errors: boolean;
-  messages: string[];
+  success: boolean;
+  error: string;
+  status: number;
 };

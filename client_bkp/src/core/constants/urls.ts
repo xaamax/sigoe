@@ -1,1 +1,0 @@
-export const URL_GESTAO_OCORRENCIAS = '/v1/gestao/ocorrencias/';

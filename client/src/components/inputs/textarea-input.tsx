@@ -14,6 +14,7 @@ interface Props {
   description?: string;
   withAsterisk?: boolean;
   name: string;
+  rows?: number;
   form?: any;
 }
 
@@ -23,6 +24,7 @@ function TextareaInput({
   description,
   withAsterisk = false,
   name,
+  rows,
   form,
 }: Props) {
   return (
@@ -34,16 +36,17 @@ function TextareaInput({
           <FormItem>
             {(label || withAsterisk) && (
               <FormLabel className="flex items-center gap-1">
-                {label}{" "}
                 {withAsterisk && (
                   <span className="mt-1 text-destructive">*</span>
                 )}
+                {label}{" "}
               </FormLabel>
             )}
             <FormControl>
               <Textarea
                 placeholder={placeholder}
                 className="resize-none"
+                rows={rows}
                 {...field}
               />
             </FormControl>

@@ -1,13 +1,18 @@
-import { getOcorrencias } from "@/core/apis/services/ocorrencia-service";
+import { getOcorrenciaDetalhes, getOcorrencias } from "@/core/apis/services/ocorrencia-service";
 import { useQuery } from "@tanstack/react-query";
 import { ocorrenciaKeys } from "./keys";
 
-export function useGetAllOcorrencias(
-  enabled: boolean = true
-) {
+export function useGetAllOcorrencias(filters = {}) {
   return useQuery({
-    queryKey: ocorrenciaKeys.filters({}),
+    queryKey: ocorrenciaKeys.list(filters),
     queryFn: () => getOcorrencias(),
-    enabled,
+  });
+}
+
+export function useGetOcorrenciaPorId(id: number) {
+  return useQuery({
+    queryKey: ocorrenciaKeys.detail(id!),
+    queryFn: () => getOcorrenciaDetalhes(id!),
+    enabled: !!id,
   });
 }

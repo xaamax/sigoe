@@ -1,17 +1,20 @@
-import { Content } from '@/components/content'
-import { ContentHeader } from '@/components/content-header'
-import { useParams } from 'react-router-dom'
-import { OcorrenciaForm } from './components/ocorrencia-form';
+import PageTitle from "@/components/commons/page-title";
+import { Content } from "@/layouts/content";
+import { useParams } from "react-router-dom";
+import { OcorrenciaForm } from "./components/ocorrencia-form";
+import { useGetOcorrenciaPorId } from "@/core/apis/queries/ocorrencias";
 
-export default function OcorrrenciaDetalhes() {
+export function OcorrrenciaDetalhes() {
   const { id } = useParams();
+  const { data } = useGetOcorrenciaPorId(Number(id));
 
   return (
     <Content>
-      <ContentHeader
-        title={`${id ? 'Editar' : 'Incluir'} ocorrência`}
+      <PageTitle
+        title={`${id ? "Editar" : "Incluir"} ocorrência`}
+        desc="Informações referentes ao registro de ocorrência."
       />
-      <OcorrenciaForm />
+      <OcorrenciaForm defaultValues={data?.data || undefined} />
     </Content>
-  )
+  );
 }

@@ -17,6 +17,7 @@ export function Ocorrrencias() {
         facetedFilters={[
           { field: 'tipo', label: 'Tipo' },
           { field: 'situacao', label: 'Situação' },
+          { field: 'dre', label: 'DRE' },
           { field: 'ue', label: 'UE' },
         ]}
       />

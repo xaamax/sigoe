@@ -13,10 +13,13 @@ export interface OcorrenciaRegistroDTO {
 export interface OcorrenciaDTO {
   id: number;
   data_ocorrencia: Date | string;
+  ue: string;
+  dre: string;
   descricao: string;
   tipo: number;
   situacao: number;
   matricula: number;
+  turma: number;
 }
 
 export interface SalvarOcorrenciaDTO {

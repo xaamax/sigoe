@@ -1,9 +1,11 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { DataTableRowActions } from "./row-actions";
+import { OcorrenciaRegistroDTO } from "@/core/dto/ocorrencia-dto";
+import { ColumnDef } from "@tanstack/react-table";
 import dayjs from "dayjs";
 
-export const columns: any = [
+export const columns : ColumnDef<OcorrenciaRegistroDTO>[] = [
   {
     id: "select",
     header: ({ table }: any) => (
@@ -33,7 +35,9 @@ export const columns: any = [
       <DataTableColumnHeader column={column} title="Data da ocorrência" />
     ),
     cell: ({ row }: any) => {
-      return <div>{dayjs(row.getValue("data_ocorrencia")).format("DD/MM/YYYY")}</div>;
+      return (
+        <div>{dayjs(row.getValue("data_ocorrencia")).format("DD/MM/YYYY")}</div>
+      );
     },
   },
   {
@@ -49,12 +53,12 @@ export const columns: any = [
     },
   },
   {
-    accessorKey: "aluno",
+    accessorKey: "dre",
     header: ({ column }: any) => (
-      <DataTableColumnHeader column={column} title="Aluno" />
+      <DataTableColumnHeader column={column} title="DRE" />
     ),
     cell: ({ row }: any) => {
-      return <div>{row.getValue("aluno")}</div>;
+      return <div>{row.getValue("dre")}</div>;
     },
     filterFn: (row: any, id: any, value: any) => {
       return value.includes(row.getValue(id));
@@ -67,6 +71,18 @@ export const columns: any = [
     ),
     cell: ({ row }: any) => {
       return <div>{row.getValue("ue")}</div>;
+    },
+    filterFn: (row: any, id: any, value: any) => {
+      return value.includes(row.getValue(id));
+    },
+  },
+  {
+    accessorKey: "aluno",
+    header: ({ column }: any) => (
+      <DataTableColumnHeader column={column} title="Aluno" />
+    ),
+    cell: ({ row }: any) => {
+      return <div>{row.getValue("aluno")}</div>;
     },
     filterFn: (row: any, id: any, value: any) => {
       return value.includes(row.getValue(id));
@@ -87,6 +103,6 @@ export const columns: any = [
 
   {
     id: "actions",
-    cell: () => <DataTableRowActions />,
+    cell: ({ row }: any) => <DataTableRowActions row={row.original} />,
   },
 ];

@@ -1,12 +1,13 @@
+import { createBrowserRouter, Navigate } from "react-router-dom";
 import { DashboardLayout } from "@/layouts/dashboard/dashboard-layout";
 import RootLayout from "@/layouts/root/root-layout";
-import Error404 from "@/pages/errors/404";
 import {
   Login,
   Dashboard,
-  Ocorrrencias
+  Ocorrrencias,
+  OcorrrenciaDetalhes,
+  Error404,
 } from "@/pages/index";
-import { createBrowserRouter, Navigate } from "react-router-dom";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,14 @@ export const router = createBrowserRouter([
           {
             path: "ocorrencias",
             element: <Ocorrrencias />,
+          },
+          {
+            path: "ocorrencias/incluir",
+            element: <OcorrrenciaDetalhes />,
+          },
+          {
+            path: "ocorrencias/:id",
+            element: <OcorrrenciaDetalhes />,
           },
         ],
       },

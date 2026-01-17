@@ -40,7 +40,6 @@ const revalidateAuth = async (oldToken: string) => {
   return refreshTokenPromise;
 };
 
-
 api.interceptors.request.use(
   async (requestConfig: InternalAxiosRequestConfig) => {
     const auth = getAuth();
@@ -83,9 +82,10 @@ api.interceptors.response.use(
 );
 
 export type ApiResult<T> = {
-  data: T | null;
   success: boolean;
+  data: T | null;
   messages: string[];
+  status?: number;
 };
 
 const tratarThen = <T>(response: AxiosResponse<T>): ApiResult<T> => ({
@@ -94,13 +94,23 @@ const tratarThen = <T>(response: AxiosResponse<T>): ApiResult<T> => ({
   messages: [],
 });
 
+
 const tratarCatch = (
   error: AxiosError<ResponseBaseDTO>
 ): ApiResult<any> => {
-  const messages = error?.response?.data?.messages ?? [];
-  if (messages.length) toast.error(messages);
+  const response = error.response?.data;
 
-  return { success: false, messages, data: null };
+  const message =
+    response?.error ?? "Erro ao processar a requisição. Tente novamente.";
+
+  toast.error(message);
+
+  return {
+    success: false,
+    data: null,
+    messages: [message],
+    status: response?.status ?? error.response?.status,
+  };
 };
 
 export const get = async <T>(

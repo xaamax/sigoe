@@ -1,15 +1,10 @@
-import ReactDOM from 'react-dom/client'
-import { StrictMode } from 'react'
-import { ThemeProvider } from './components/theme-provider'
-import '@/index.css'
-import { Toaster } from './components/ui/toaster'
-import RoutesConfig from '@/routes/router'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
-      <RoutesConfig />
-      <Toaster />
-    </ThemeProvider>
+    <App />
   </StrictMode>
-)
+);

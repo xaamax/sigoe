@@ -1,0 +1,62 @@
+import { Form } from "@/components/ui/form";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { loginSchema } from "../schemas/login-schema";
+import TextInput from "@/components/inputs/text-input";
+import PasswordInput from "@/components/inputs/password-input";
+import { Button } from "@/components/ui/button";
+import authService from "@/core/apis/services/auth-service";
+import { setAuth } from "@/hooks/use-auth-operations";
+
+type FormLoginValues = {
+  username: string;
+  password: string;
+};
+
+export function LoginForm() {
+  const form = useForm<FormLoginValues>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      username: "",
+      password: "",
+    },
+  });
+
+  function onSubmit(values: FormLoginValues) {
+    authService.login(values)
+      .then((response) => setAuth(response.data))
+      .catch((error) => {
+        toast.error(error.response?.data?.messages || "Usuário ou senha inválidos");
+      })
+  }
+
+  return (
+    <Form {...form}>
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="rounded-lg p-4 space-y-4 w-full sm:w-[400px]"
+      >
+        <TextInput
+          label="Usuário"
+          placeholder="Digite seu usuário"
+          name="username"
+          withAsterisk
+          form={form}
+        />
+
+        <PasswordInput
+          label="Senha"
+          placeholder="Digite sua senha"
+          name="password"
+          withAsterisk
+          form={form}
+        />
+
+        <Button type="submit" fullWidth>
+          Entrar
+        </Button>
+      </form>
+    </Form>
+  );
+}

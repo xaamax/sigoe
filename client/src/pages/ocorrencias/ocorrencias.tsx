@@ -1,39 +1,25 @@
-import { useCallback, useEffect, useState } from 'react'
-import { Content } from '@/components/content'
-import { ContentHeader } from '@/components/content-header'
-import { OcorrenciaDTO } from '@/core/dto/ocorrencia-dto'
-import { DataTable as OcorrenciasTable } from '@/components/data-table/data-table'
-import { columns } from './components/ocorrencias-columns'
-import ocorrenciaService from '@/core/services/ocorrencia-service'
+import { DataTable } from "@/components/data-table/data-table";
+import { columns } from "./components/columns";
+import PageTitle from "@/components/commons/page-title";
+import { useGetAllOcorrencias } from "@/core/apis/queries/ocorrencias";
 
-export default function Ocorrrencias() {
-  const [ocorrencias, setOcorrencias] = useState<OcorrenciaDTO[]>([])
+export function Ocorrrencias() {
 
-  const loadOcorrencias = useCallback(async () => {
-    await ocorrenciaService.getOcorrencias().then((response) => {
-      if (response.success) setOcorrencias(response.data || [])
-    })
-  }, [])
-
-  useEffect(() => {
-    loadOcorrencias()
-  }, [])
+  const { data } = useGetAllOcorrencias();
 
   return (
-    <Content>
-      <ContentHeader
-        title='Ocorrências'
-        subtitle='Gerenciamento de ocorrências registradas'
-      />
-      <OcorrenciasTable
-        data={ocorrencias}
-        columns={columns({ delete: () => {} })}
+    <div className="w-full space-y-4">
+      <PageTitle title="Ocorrências" desc="Gerencie os registros de ocorrências" />
+
+      <DataTable
+        data={data?.data || []}
+        columns={columns}
         facetedFilters={[
           { field: 'tipo', label: 'Tipo' },
           { field: 'situacao', label: 'Situação' },
           { field: 'ue', label: 'UE' },
         ]}
       />
-    </Content>
-  )
+    </div>
+  );
 }

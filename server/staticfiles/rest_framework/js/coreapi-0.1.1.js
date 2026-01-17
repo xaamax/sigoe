@@ -997,7 +997,7 @@ var rules = [
   ['#', 'hash'],                        // Extract from the back.
   ['?', 'query'],                       // Extract from the back.
   ['/', 'pathname'],                    // Extract from the back.
-  ['@', 'auth', 1],                     // Extract from the front.
+  ['@/', 'auth', 1],                     // Extract from the front.
   [NaN, 'host', undefined, 1, 1],       // Set left over value.
   [/:(\d+)$/, 'port', undefined, 1],    // RegExp the back.
   [NaN, 'hostname', undefined, 1, 1]    // Set left over.
@@ -1309,7 +1309,7 @@ URL.prototype.toString = function toString(stringify) {
   if (url.username) {
     result += url.username;
     if (url.password) result += ':'+ url.password;
-    result += '@';
+    result += '@/';
   }
 
   result += url.host + url.pathname;

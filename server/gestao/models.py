@@ -65,7 +65,7 @@ class Ocorrencia(ModelBase):
     data_ocorrencia = models.DateField(verbose_name='Data da Ocorrência')
     descricao = models.TextField(verbose_name='Descrição')
     situacao = models.IntegerField(choices=SituacaoOcorrencia.choices, verbose_name='Situação')
-    responsavel = models.OneToOneField(
+    responsavel = models.ForeignKey(
         User,
         on_delete=models.PROTECT,
         related_name='ocorrencias',

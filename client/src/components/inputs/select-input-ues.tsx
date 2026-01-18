@@ -10,6 +10,8 @@ export function SelectInputUes({ form }: Props) {
 
   const { data, isLoading } = useGetAllUesByDre(dre);
 
+  if (!data?.length && isLoading) return null;
+
   return (
     <SelectInput
       isLoading={isLoading}

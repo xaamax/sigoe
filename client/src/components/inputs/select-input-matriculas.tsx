@@ -7,8 +7,10 @@ type Props = {
 
 export function SelectInputMatriculas({ form }: Props) {
   const turma = form.watch("turma");
-  
+
   const { data, isLoading } = useGetAllMatriculasByTurma(turma);
+
+  if (!data?.length && isLoading) return null;
 
   return (
     <SelectInput

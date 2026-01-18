@@ -10,6 +10,8 @@ export function SelectInputTurmas({ form }: Props) {
 
   const { data, isLoading } = useGetAllTurmasByUe(ue);
 
+  if (!data?.length && isLoading) return null;
+
   return (
     <SelectInput
       type="number"

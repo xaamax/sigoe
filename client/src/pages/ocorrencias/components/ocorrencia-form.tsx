@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { Form } from "@/components/ui/form";
-import dayjs from "dayjs";
 import Grid from "@/layouts/grid";
 import { ocorrenciaSchema } from "../schema/ocorrencia-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,28 +19,29 @@ import {
 import { SelectInputTurmas } from "@/components/inputs/select-input-turmas";
 import { SelectInputMatriculas } from "@/components/inputs/select-input-matriculas";
 import { toast } from "sonner";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ocorrenciaDtoToForm } from "../schema/ocorrencia-form.adapter";
 import { useNavigate } from "react-router-dom";
+import { SituacoesOcorrencia } from "@/core/enums/ocorrencia-enum";
+import dayjs from "dayjs";
 
 interface FormProps {
   defaultValues?: OcorrenciaDTO;
 }
 
+type SubmitAction = "save" | "save_add_other";
+
 export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
   const form = useForm<OcorrenciaFormValues>({
     resolver: zodResolver(ocorrenciaSchema),
-    defaultValues: defaultValues ?? {
-      dre: "",
-      ue: "",
-      data_ocorrencia: dayjs().format("YYYY-MM-DD"),
-      situacao: undefined as unknown as number,
-      tipo: undefined as unknown as number,
-      descricao: "",
-      turma: undefined as unknown as number,
-      matricula: undefined as unknown as number,
-    },
+    shouldUnregister: false,
+    defaultValues: {
+      situacao: SituacoesOcorrencia.AguardandoAnalise,
+      data_ocorrencia: dayjs().format('YYYY-MM-DD')
+    }
   });
+
+  const [submitAction, setSubmitAction] = useState<SubmitAction>("save");
 
   const navigate = useNavigate();
   const { reset } = form;
@@ -60,7 +60,21 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
     return await submitOcorrencia(formData).then((response) => {
       if (response.success) {
         toast.success("Ocorrência salva com sucesso!");
-        navigate("/ocorrencias");
+
+        if (submitAction === "save_add_other") {
+          form.reset({
+            dre: "",
+            ue: "",
+            data_ocorrencia: dayjs().format("YYYY-MM-DD"),
+            situacao: undefined,
+            tipo: undefined,
+            descricao: "",
+            turma: undefined,
+            matricula: undefined,
+          });
+          return;
+        }
+        navigate("/ocorrencias/consultar");
       }
     });
   };
@@ -94,15 +108,17 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
             withAsterisk
             form={form}
           />
-          <SelectInput
-            type="number"
-            label="Situação"
-            placeholder="Selecione a situação"
-            name="situacao"
-            data={SITUACAO_OCORRENCIA_OPTIONS}
-            withAsterisk
-            form={form}
-          />
+          {defaultValues?.id && (
+            <SelectInput
+              type="number"
+              label="Situação"
+              placeholder="Selecione a situação"
+              name="situacao"
+              data={SITUACAO_OCORRENCIA_OPTIONS}
+              withAsterisk
+              form={form}
+            />
+          )}
         </Grid>
         <TextareaInput
           label="Descrição"
@@ -112,9 +128,25 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
           rows={5}
           form={form}
         />
-        <Button type="submit" disabled={!form.formState.isValid}>
-          Salvar
-        </Button>
+        <div className="flex justify-end gap-2">
+          {!defaultValues?.id && (
+            <Button
+              type="submit"
+              variant="outline_primary"
+              disabled={!form.formState.isValid}
+              onClick={() => setSubmitAction("save_add_other")}
+            >
+              Salvar e incluir outro
+            </Button>
+          )}
+          <Button
+            type="submit"
+            disabled={!form.formState.isValid}
+            onClick={() => setSubmitAction("save")}
+          >
+            Salvar
+          </Button>
+        </div>
       </form>
     </Form>
   );

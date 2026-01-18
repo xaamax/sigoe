@@ -25,6 +25,7 @@ interface Props {
   form?: any;
   isLoading?: boolean;
   className?: string;
+  disabled?: boolean; 
 }
 
 function SelectInput({
@@ -38,6 +39,7 @@ function SelectInput({
   form,
   isLoading = false,
   className,
+  disabled
 }: Props) {
   return (
     <FormField
@@ -52,8 +54,8 @@ function SelectInput({
             </FormLabel>
           )}
           <Select
-            value={field.value}
-            disabled={isLoading}
+            value={field.value ?? ""}
+            disabled={isLoading || disabled}
             onValueChange={(value) => {
               const parsed = type === "number" ? Number(value) : value;
 

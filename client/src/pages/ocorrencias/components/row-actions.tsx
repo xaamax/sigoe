@@ -1,5 +1,4 @@
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
-
+import { DotsVerticalIcon } from "@radix-ui/react-icons";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -25,7 +24,7 @@ export function DataTableRowActions({ row }: Props) {
           variant="ghost"
           className="flex h-8 w-8 p-0 data-[state=open]:bg-muted"
         >
-          <DotsHorizontalIcon className="h-4 w-4" />
+          <DotsVerticalIcon className="h-4 w-4" />
           <span className="sr-only">Abrir menu</span>
         </Button>
       </DropdownMenuTrigger>

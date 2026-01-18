@@ -28,7 +28,7 @@ export const router = createBrowserRouter([
             element: <Dashboard />,
           },
           {
-            path: "ocorrencias",
+            path: "ocorrencias/consultar",
             element: <Ocorrrencias />,
           },
           {

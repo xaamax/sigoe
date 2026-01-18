@@ -9,8 +9,6 @@ import {
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
-import { PlusCircleIcon } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>;
@@ -19,18 +17,8 @@ interface DataTableViewOptionsProps<TData> {
 export function DataTableViewOptions<TData>({
   table,
 }: DataTableViewOptionsProps<TData>) {
-  const navigate = useNavigate();
 
   return (
-    <div className="flex gap-2">
-      <Button
-        size="sm"
-        className="ml-auto hidden h-8 lg:flex"
-        onClick={() => navigate("/ocorrencias/incluir")}
-      >
-        <PlusCircleIcon className="mr-2 h-4 w-4" />
-        Incluir
-      </Button>
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button
@@ -71,6 +59,5 @@ export function DataTableViewOptions<TData>({
             })}
         </DropdownMenuContent>
       </DropdownMenu>
-    </div>
   );
 }

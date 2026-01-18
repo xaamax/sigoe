@@ -11,8 +11,8 @@ export function useGetAllOcorrencias(filters = {}) {
 
 export function useGetOcorrenciaPorId(id: number) {
   return useQuery({
-    queryKey: ocorrenciaKeys.detail(id!),
-    queryFn: () => getOcorrenciaDetalhes(id!),
+    queryKey: ocorrenciaKeys.detail(id),
+    queryFn: () => getOcorrenciaDetalhes(id),
     enabled: !!id,
   });
 }

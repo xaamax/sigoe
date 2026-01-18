@@ -1,14 +1,19 @@
 import Text from "@/components/commons/text";
 import { Button } from "../ui/button";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, PlusCircleIcon } from "lucide-react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   title: string;
   desc?: string;
   hideToBack?: boolean;
+  actions?: React.ReactNode;
 }
 
-function PageTitle({ title, desc, hideToBack }: Props) {
+function PageTitle({ title, desc, hideToBack, actions }: Props) {
+  const navigate = useNavigate();
+
   return (
     <div className="mb-4">
       <div className="flex flex-wrap items-center justify-between gap-2">
@@ -22,12 +27,13 @@ function PageTitle({ title, desc, hideToBack }: Props) {
             />
           )}
           <div>
-          <Text size="xxl" weight="bold">
-            {title}
-          </Text>
-          <Text className="text-muted-foreground">{desc}</Text>
+            <Text size="xxl" weight="bold">
+              {title}
+            </Text>
+            <Text className="text-muted-foreground">{desc}</Text>
           </div>
         </div>
+        {actions && <div>{actions}</div>}
       </div>
     </div>
   );

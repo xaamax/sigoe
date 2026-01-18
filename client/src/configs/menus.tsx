@@ -24,7 +24,7 @@ const menus = [
       {
         name: "Consultar",
         icon: <Search className="h-[18px] w-[18px]" />,
-        route: "ocorrencias",
+        route: "ocorrencias/consultar",
       },
     ],
   },

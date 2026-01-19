@@ -1,2 +1,45 @@
+# =========================
+# IDEs
+# =========================
 .vscode/
+.idea/
+
+# =========================
+# Virtualenv
+# =========================
 venv/
+.env/
+.env.*
+
+# =========================
+# Django
+# =========================
+staticfiles/
+media/
+
+# =========================
+# Python bytecode
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Pytest / Coverage
+# =========================
+.pytest_cache/
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+coverage.xml
+nosetests.xml
+*.cover
+.hypothesis/
+.cache/
+
+# =========================
+# OS
+# =========================
+.DS_Store
+Thumbs.db

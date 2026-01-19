@@ -66,3 +66,15 @@ class OcorrenciaListaSerializer(serializers.ModelSerializer):
             'dre',
             'aluno',
         ]
+
+
+class OcorrenciaDashboardSerializer(serializers.Serializer):
+    totalOcorrencias = serializers.IntegerField()
+    AguardandoAnalise = serializers.IntegerField()
+    Finalizadas = serializers.IntegerField()
+
+    ocorrenciasPorTipo = serializers.ListField()
+    ocorrenciasPorUe = serializers.ListField()
+    ocorrenciasPorTurma = serializers.ListField()
+    rangkingOcorrenciaDres = serializers.ListField()
+    rangkingOcorrenciaUes = serializers.ListField()

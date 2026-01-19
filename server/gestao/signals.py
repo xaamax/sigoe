@@ -20,6 +20,7 @@ def guardar_cep_anterior(sender, instance, **kwargs):
     else:
         instance._cep_anterior = None
 
+
 @receiver(post_save, sender=Aluno)
 def preencher_endereco_por_cep(sender, instance, created, **kwargs):
     cep_atual = instance.cep

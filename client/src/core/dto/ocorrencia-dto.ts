@@ -30,3 +30,14 @@ export interface SalvarOcorrenciaDTO {
   situacao: number;
   matricula: number;
 }
+
+export interface OcorrenciaDashboardDTO {
+  totalOcorrencias: number
+  AguardandoAnalise: number
+  Finalizadas: number
+  ocorrenciasPorTipo: Record<string, number>[]
+  ocorrenciasPorUe: Record<string, number>[]
+  ocorrenciasPorTurma: Record<string, number>[]
+  rangkingOcorrenciaDres: Record<string, number>[]
+  rangkingOcorrenciaUes: Record<string, number>[]
+}

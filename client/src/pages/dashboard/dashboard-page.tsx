@@ -10,17 +10,66 @@ import { RecentSales } from "./components/recent-sales";
 import BarChartMultiple from "@/components/charts/chart-bar-multiple";
 import { Content } from "@/layouts/content";
 import PageTitle from "@/components/commons/page-title";
-
-export const metadata = {
-  title: "Dashboard",
-  description: "Example dashboard app built using the components.",
-};
+import Grid from "@/layouts/grid";
+import { SelectInputDres } from "@/components/inputs/select-input-dres";
+import { Form } from "@/components/ui/form";
+import { useForm } from "react-hook-form";
+import { DashboardFormValues, dashboardSchema } from "./schema/dashboard-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { SelectInputUes } from "@/components/inputs/select-input-ues";
+import SelectInput from "@/components/inputs/select-input";
+import dayjs from "dayjs";
+import Box from "@/widgets/box";
+import { CheckCircle, ClipboardList, TriangleAlert } from "lucide-react";
+import { useGetOcorrenciasDashboard } from "@/core/apis/queries/ocorrencias";
 
 export function Dashboard() {
+  const form = useForm<DashboardFormValues>({
+    resolver: zodResolver(dashboardSchema),
+    defaultValues: {
+      ano_letivo: Number(dayjs().year())
+    }
+  });
+
+  const { data } = useGetOcorrenciasDashboard({
+    ano_letivo: form.watch('ano_letivo'),
+    codigo_dre: form.watch('dre'),
+    codigo_ue: form.watch('ue'),
+  })
+
+
   return (
     <Content>
-        <PageTitle title="Dashboard" />
-      <Tabs defaultValue="overview" className="space-y-4">
+      <PageTitle title="Dashboard" hideToBack />
+      <Form {...form}>
+        <Grid cols="12 12 3 3">
+          <SelectInput
+            type="number"
+            label="Ano Letivo"
+            placeholder="Selecione o Ano Letivo"
+            name="ano_letivo"
+            data={[2026, 2025].map((ano) => ({ label: String(ano), value: ano }))}
+            form={form}
+          />
+          <SelectInputDres form={form} withAsterisk={false} />
+          <SelectInputUes form={form} withAsterisk={false} />
+        </Grid>
+      </Form>
+
+      <div className="space-y-4 pt-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <Box title="Ocorrências Registradas" value={data?.data?.totalOcorrencias || 0} icon={TriangleAlert} />
+          <Box title="Aguardando Análise" value={data?.data?.AguardandoAnalise || 0} icon={ClipboardList} />
+          <Box title="Finalizadas" value={data?.data?.Finalizadas || 0} icon={CheckCircle} />
+        </div>
+      </div>
+
+
+
+
+
+
+      {/* <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="analytics" disabled>
@@ -155,7 +204,7 @@ export function Dashboard() {
             </Card>
           </div>
         </TabsContent>
-      </Tabs>
+      </Tabs> */}
     </Content>
   );
 }

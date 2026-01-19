@@ -2,7 +2,7 @@ import {
   LayoutDashboard,
   Plus,
   Search,
-  CircleAlert,
+  TriangleAlert,
 } from "lucide-react";
 
 const menus = [
@@ -13,13 +13,13 @@ const menus = [
   },
   {
     name: "Ocorrências",
-    icon: <CircleAlert className="h-[18px] w-[18px]" />,
+    icon: <TriangleAlert className="h-[18px] w-[18px]" />,
     route: "ocorrencias",
     childs: [
       {
         name: "Incluir",
         icon: <Plus className="h-[18px] w-[18px]" />,
-        route: "incluir",
+        route: "ocorrencias/incluir",
       },
       {
         name: "Consultar",

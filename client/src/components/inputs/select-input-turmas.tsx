@@ -3,9 +3,10 @@ import SelectInput from "./select-input";
 
 type Props = {
   form?: any;
+  withAsterisk?: boolean;
 };
 
-export function SelectInputTurmas({ form }: Props) {
+export function SelectInputTurmas({ form, withAsterisk }: Props) {
   const ue = form.watch("ue");
 
   const { data, isLoading } = useGetAllTurmasByUe(ue);
@@ -17,9 +18,9 @@ export function SelectInputTurmas({ form }: Props) {
       type="number"
       isLoading={isLoading}
       label="Turma"
-      placeholder="Selecione a turma"
+      placeholder="Selecione a Turma"
       name="turma"
-      withAsterisk
+      withAsterisk={withAsterisk}
       data={data || []}
       form={form}
     />

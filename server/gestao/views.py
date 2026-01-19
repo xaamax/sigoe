@@ -4,12 +4,25 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from django.contrib.auth import get_user_model
+from rest_framework.exceptions import ValidationError
+from drf_spectacular.utils import extend_schema
+from .services.dashboard_service import montar_dashboard_ocorrencias
+from .parameters import DASHBOARD_OCORRENCIAS_PARAMETROS
 
 from .models import Turma, Aluno, Matricula, Ocorrencia
-from .serializers import TurmaSerializer, AlunoSerializer, MatriculaSerializer, OcorrenciaSerializer, OcorrenciaListaSerializer, OcorrenciaDetalhesSerializer
+from .serializers import (
+    TurmaSerializer,
+    AlunoSerializer,
+    MatriculaSerializer,
+    OcorrenciaSerializer,
+    OcorrenciaListaSerializer,
+    OcorrenciaDetalhesSerializer,
+    OcorrenciaDashboardSerializer
+)
 from .filters import TurmaFilterClass, AlunoFilterClass, OcorrenciaFilterClass
 
 User = get_user_model()
+
 
 class TurmaViewSet(viewsets.ModelViewSet):
     queryset = Turma.objects.all()
@@ -65,3 +78,32 @@ class OcorrenciaViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return OcorrenciaDetalhesSerializer
         return OcorrenciaSerializer
+
+    @extend_schema(
+        summary="Dashboard de Ocorrências Escolares",
+        description="""
+        Retorna indicadores agregados de ocorrências escolares,
+        com filtros institucionais por ano letivo, DRE e UE.
+        """,
+        parameters=DASHBOARD_OCORRENCIAS_PARAMETROS,
+        responses={200: OcorrenciaDashboardSerializer}
+    )
+    @action(detail=False, methods=["get"], url_path="dashboard")
+    def dashboard(self, request):
+        ano_letivo = request.query_params.get("ano_letivo")
+        codigo_dre = request.query_params.get("codigo_dre")
+        codigo_ue = request.query_params.get("codigo_ue")
+
+        if not ano_letivo:
+            raise ValidationError({
+                "ano_letivo": "Informe o ano letivo"
+            })
+
+        data = montar_dashboard_ocorrencias(
+            ano_letivo=ano_letivo,
+            codigo_dre=codigo_dre,
+            codigo_ue=codigo_ue
+        )
+
+        serializer = OcorrenciaDashboardSerializer(data)
+        return Response(serializer.data)

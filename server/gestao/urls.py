@@ -1,7 +1,12 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 
-from .views import TurmaViewSet, AlunoViewSet, MatriculaViewSet, OcorrenciaViewSet
+from .views import (
+    TurmaViewSet,
+    AlunoViewSet,
+    MatriculaViewSet,
+    OcorrenciaViewSet,
+)
 
 router = DefaultRouter()
 router.register('turmas', TurmaViewSet)

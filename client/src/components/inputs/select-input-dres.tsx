@@ -3,18 +3,19 @@ import SelectInput from "./select-input";
 
 type Props = {
   form?: any;
+  withAsterisk?: boolean
 };
 
-export function SelectInputDres({ form }: Props) {
+export function SelectInputDres({ form, withAsterisk }: Props) {
   const { data, isLoading } = useGetAllDres();
 
   return (
     <SelectInput
       isLoading={isLoading}
-      label="DRE"
+      label="Diretoria Regional de Educação (DRE)"
       placeholder="Selecione a DRE"
       name="dre"
-      withAsterisk
+      withAsterisk={withAsterisk}
       data={data || []}
       form={form}
     />

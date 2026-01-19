@@ -17,7 +17,7 @@ export function SelectInputMatriculas({ form }: Props) {
       type="number"
       isLoading={isLoading}
       label="Aluno(a)"
-      placeholder="Selecione o aluno(a)"
+      placeholder="Selecione o Aluno(a)"
       name="matricula"
       withAsterisk
       data={data || []}

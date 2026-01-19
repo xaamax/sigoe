@@ -21,7 +21,7 @@ class UeViewSet(viewsets.ModelViewSet):
     rql_filter_class = UeFilterClass
     serializer_class = UeSerializer
     permission_classes = [DjangoModelPermissions, IsAdminUser]
-    
+
     @action(detail=False, methods=["get"], url_path="por-dre/(?P<codigo_dre>[^/.]+)")
     def por_dre(self, request, codigo_dre=None):
         ues = Ue.objects.filter(dre_id=codigo_dre)

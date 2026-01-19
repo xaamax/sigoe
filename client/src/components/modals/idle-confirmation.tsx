@@ -17,17 +17,17 @@ function IdleConfirmation({ onLogout }: Props) {
   return (
     <div className="w-[400px] rounded-lg overflow-hidden bg-background p-4">
       <Text size="lg">
-        <b>You have been idled</b>
+        <b>Você ficou ocioso.</b>
       </Text>
 
       <br />
 
       <div className="flex gap-4 justify-end">
         <Button onClick={handleLogout} variant="secondary">
-          Log out
+          Logout
         </Button>
 
-        <Button onClick={closeAll}>Continue</Button>
+        <Button onClick={closeAll}>Continuar</Button>
       </div>
     </div>
   );

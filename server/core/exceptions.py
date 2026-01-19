@@ -18,7 +18,7 @@ def custom_exception_handler(exc, context):
                 {
                     "success": False,
                     "error": first_error,
-                    "errors": response.data,
+                    # "errors": response.data,
                     "status": response.status_code,
                 },
                 status=response.status_code,
@@ -56,6 +56,7 @@ def custom_exception_handler(exc, context):
         },
         status=drf_status.HTTP_500_INTERNAL_SERVER_ERROR,
     )
+
 
 def _extract_first_error_message(errors: dict) -> str:
     if not isinstance(errors, dict):

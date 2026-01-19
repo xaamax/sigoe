@@ -1,8 +1,7 @@
 import Text from "@/components/commons/text";
 import { Button } from "../ui/button";
-import { ChevronLeft, PlusCircleIcon } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 interface Props {
   title: string;
@@ -12,10 +11,8 @@ interface Props {
 }
 
 function PageTitle({ title, desc, hideToBack, actions }: Props) {
-  const navigate = useNavigate();
-
   return (
-    <div className="mb-4">
+    <div className="mb-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <div className="flex items-center gap-2">
           {!hideToBack && (

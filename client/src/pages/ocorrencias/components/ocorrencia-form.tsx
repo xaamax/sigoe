@@ -86,9 +86,9 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
         className="space-y-6 px-12 pt-4"
       >
         <Grid cols="12 2 2 2">
-          <SelectInputDres form={form} />
-          <SelectInputUes form={form} />
-          <SelectInputTurmas form={form} />
+          <SelectInputDres form={form} withAsterisk={true} />
+          <SelectInputUes form={form} withAsterisk={true} />
+          <SelectInputTurmas form={form} withAsterisk={true} />
           <SelectInputMatriculas form={form} />
         </Grid>
         <Grid cols="12 2 3 3">

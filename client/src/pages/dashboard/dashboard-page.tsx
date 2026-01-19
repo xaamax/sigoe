@@ -1,27 +1,21 @@
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { RecentSales } from "./components/recent-sales";
-import BarChartMultiple from "@/components/charts/chart-bar-multiple";
 import { Content } from "@/layouts/content";
 import PageTitle from "@/components/commons/page-title";
 import Grid from "@/layouts/grid";
-import { SelectInputDres } from "@/components/inputs/select-input-dres";
+import { DreSelect } from "@/components/selects/dre-select";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
 import { DashboardFormValues, dashboardSchema } from "./schema/dashboard-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SelectInputUes } from "@/components/inputs/select-input-ues";
+import { SelectInputUes } from "@/components/selects/select-input-ues";
 import SelectInput from "@/components/inputs/select-input";
 import dayjs from "dayjs";
 import Box from "@/widgets/box";
 import { CheckCircle, ClipboardList, TriangleAlert } from "lucide-react";
 import { useGetOcorrenciasDashboard } from "@/core/apis/queries/ocorrencias";
+import OcorrenciaTipoChart from "./components/chart-tipo-ocorrencia";
+import OcorrenciasDreChart from "./components/chart-ocorrencia-dre";
+import OcorrenciasUeChart from "./components/chart-ocorrencia-ue";
+import OcorrenciasTurmaChart from "./components/chart-ocorrencia-turma";
 
 export function Dashboard() {
   const form = useForm<DashboardFormValues>({
@@ -51,7 +45,7 @@ export function Dashboard() {
             data={[2026, 2025].map((ano) => ({ label: String(ano), value: ano }))}
             form={form}
           />
-          <SelectInputDres form={form} withAsterisk={false} />
+          <DreSelect name="dre" form={form} withAsterisk={false} />
           <SelectInputUes form={form} withAsterisk={false} />
         </Grid>
       </Form>
@@ -61,6 +55,24 @@ export function Dashboard() {
           <Box title="Ocorrências Registradas" value={data?.data?.totalOcorrencias || 0} icon={TriangleAlert} />
           <Box title="Aguardando Análise" value={data?.data?.AguardandoAnalise || 0} icon={ClipboardList} />
           <Box title="Finalizadas" value={data?.data?.Finalizadas || 0} icon={CheckCircle} />
+        </div>
+      </div>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
+        <div className="col-span-8">
+          {!form.watch("dre") && (
+            <OcorrenciasDreChart chartData={data?.data?.ocorrenciasPorDre || []} />
+          )}
+
+          {form.watch("dre") && !form.watch("ue") && (
+            <OcorrenciasUeChart chartData={data?.data?.ocorrenciasPorUe || []} />
+          )}
+
+          {form.watch("ue") && (
+            <OcorrenciasTurmaChart chartData={data?.data?.ocorrenciasPorTurma || []} />
+          )}
+        </div>
+        <div className="col-span-4">
+          <OcorrenciaTipoChart chartData={data?.data?.ocorrenciasPorTipo || []} />
         </div>
       </div>
 

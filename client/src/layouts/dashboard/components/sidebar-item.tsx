@@ -74,6 +74,10 @@ function SidebarItem({
     }
   };
 
+  const closeChilds = () => {
+    setShowChilds(false)
+  }
+
   /** ======= Collapsed Sidebar ======= */
   if (sidebarCollapsed && collapsible) {
     return (
@@ -146,7 +150,7 @@ function SidebarItem({
         className={clsx(
           "w-full h-9 flex items-center justify-between px-2 rounded-lg cursor-pointer transition-all duration-300 text-muted-foreground",
           (isActiveModule() || hasActiveChild()) &&
-            "bg-primary text-primary-foreground",
+          "bg-primary text-primary-foreground",
           !(isActiveModule() || hasActiveChild()) && "hover:bg-primary/10"
         )}
       >
@@ -181,6 +185,7 @@ function SidebarItem({
             name={c.name}
             route={c.route}
             closeSheet={closeSheet}
+            onClick={() => closeChilds()}
           />
         ))}
       </div>
@@ -194,12 +199,14 @@ function ChildItem({
   route,
   collapsed = false,
   closeSheet,
-}: Omit<Props, "childs"> & { collapsed?: boolean }) {
+  onClick,
+}: Omit<Props, "childs"> & { collapsed?: boolean, onClick?: () => void }) {
   const isMatched = useMatch(route);
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(route);
+    if (onClick) onClick()
     if (closeSheet) closeSheet((prev) => !prev);
   };
 

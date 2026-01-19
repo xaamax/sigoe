@@ -20,6 +20,12 @@ class OcorrenciasDashboardService:
             codigo_ue=codigo_ue
         )
 
+        ocorrencias_por_tipo = (
+            ocorrencias
+            .values("tipo")
+            .annotate(total=Count("id"))
+        )
+
         return {
             "totalOcorrencias": ocorrencias.count(),
 
@@ -27,16 +33,31 @@ class OcorrenciasDashboardService:
             "Finalizadas": ocorrencias.filter(situacao=3).count(),
 
             "ocorrenciasPorTipo": [
-                {TipoOcorrencia(item["tipo"]).label: item["total"]}
+                {
+                    "label": TipoOcorrencia(item["tipo"]).label,
+                    "total": item["total"],
+                    # opcional – se quiser mapear cores por tipo
+                    # "fill": f"var(--color-{TipoOcorrencia(item['tipo']).name.lower()})"
+                }
+                for item in ocorrencias_por_tipo
+            ],
+            "ocorrenciasPorDre": [
+                {
+                    "label": item["matricula__turma__ue__dre__nome"],
+                    "total": item["total"]
+                }
                 for item in (
                     ocorrencias
-                    .values("tipo")
+                    .values("matricula__turma__ue__dre__nome")
                     .annotate(total=Count("id"))
+                    .order_by("-total")[:10]
                 )
             ],
-
             "ocorrenciasPorUe": [
-                {item["matricula__turma__ue__nome"]: item["total"]}
+                {
+                    "label": item["matricula__turma__ue__nome"],
+                    "total": item["total"]
+                }
                 for item in (
                     ocorrencias
                     .values("matricula__turma__ue__nome")
@@ -44,34 +65,16 @@ class OcorrenciasDashboardService:
                     .order_by("-total")[:10]
                 )
             ],
-
             "ocorrenciasPorTurma": [
-                {item["matricula__turma__nome"]: item["total"]}
+                {
+                    "label": item["matricula__turma__nome"],
+                    "total": item["total"]
+                }
                 for item in (
                     ocorrencias
                     .values("matricula__turma__nome")
                     .annotate(total=Count("id"))
                     .order_by("-total")[:10]
                 )
-            ],
-
-            # "rankingOcorrenciaDres": [
-            #     {item["matricula__turma__ue__dre__nome"]: item["total"]}
-            #     for item in (
-            #         ocorrencias
-            #         .values("matricula__turma__ue__dre__nome")
-            #         .annotate(total=Count("id"))
-            #         .order_by("-total")
-            #     )
-            # ],
-
-            # "rankingOcorrenciaUes": [
-            #     {item["matricula__turma__ue__nome"]: item["total"]}
-            #     for item in (
-            #         ocorrencias
-            #         .values("matricula__turma__ue__nome")
-            #         .annotate(total=Count("id"))
-            #         .order_by("-total")
-            #     )
-            # ],
+            ]
         }

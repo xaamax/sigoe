@@ -10,14 +10,14 @@ import { submitOcorrencia } from "@/core/apis/services/ocorrencia-service";
 import SelectInput from "@/components/inputs/select-input";
 import DateInput from "@/components/inputs/date-input";
 import TextareaInput from "@/components/inputs/textarea-input";
-import { SelectInputDres } from "@/components/inputs/select-input-dres";
-import { SelectInputUes } from "@/components/inputs/select-input-ues";
+import { DreSelect } from "@/components/selects/dre-select";
+import { SelectInputUes } from "@/components/selects/select-input-ues";
 import {
   SITUACAO_OCORRENCIA_OPTIONS,
   TIPO_OCORRENCIA_OPTIONS,
 } from "@/core/constants/options";
-import { SelectInputTurmas } from "@/components/inputs/select-input-turmas";
-import { SelectInputMatriculas } from "@/components/inputs/select-input-matriculas";
+import { SelectInputTurmas } from "@/components/selects/select-input-turmas";
+import { SelectInputMatriculas } from "@/components/selects/select-input-matriculas";
 import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { ocorrenciaDtoToForm } from "../schema/ocorrencia-form.adapter";
@@ -86,7 +86,7 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
         className="space-y-6 px-12 pt-4"
       >
         <Grid cols="12 2 2 2">
-          <SelectInputDres form={form} withAsterisk={true} />
+          <DreSelect name="dre" form={form} withAsterisk={true} />
           <SelectInputUes form={form} withAsterisk={true} />
           <SelectInputTurmas form={form} withAsterisk={true} />
           <SelectInputMatriculas form={form} />

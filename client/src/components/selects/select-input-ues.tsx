@@ -1,5 +1,5 @@
 import { useGetAllUesByDre } from "@/core/apis/queries/sme";
-import SelectInput from "./select-input";
+import SelectInput from "../inputs/select-input";
 
 type Props = {
   form?: any;

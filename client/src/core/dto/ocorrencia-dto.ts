@@ -35,9 +35,20 @@ export interface OcorrenciaDashboardDTO {
   totalOcorrencias: number
   AguardandoAnalise: number
   Finalizadas: number
-  ocorrenciasPorTipo: Record<string, number>[]
-  ocorrenciasPorUe: Record<string, number>[]
-  ocorrenciasPorTurma: Record<string, number>[]
-  rangkingOcorrenciaDres: Record<string, number>[]
-  rangkingOcorrenciaUes: Record<string, number>[]
+  ocorrenciasPorTipo: {
+    label: string;
+    total: number;
+  }[]
+  ocorrenciasPorDre: {
+    label: string;
+    total: number;
+  }[]
+  ocorrenciasPorUe: {
+    label: string;
+    total: number;
+  }[]
+  ocorrenciasPorTurma: {
+    label: string;
+    total: number;
+  }[]
 }

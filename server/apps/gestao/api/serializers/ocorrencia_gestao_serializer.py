@@ -56,7 +56,6 @@ class OcorrenciaDashboardSerializer(serializers.Serializer):
     Finalizadas = serializers.IntegerField()
 
     ocorrenciasPorTipo = serializers.ListField()
+    ocorrenciasPorDre = serializers.ListField()
     ocorrenciasPorUe = serializers.ListField()
     ocorrenciasPorTurma = serializers.ListField()
-    # rangkingOcorrenciaDres = serializers.ListField()
-    # rangkingOcorrenciaUes = serializers.ListField()

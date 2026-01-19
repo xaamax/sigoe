@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Turma, Aluno, Matricula, Ocorrencia
+from apps.gestao.models import Turma, Aluno, Matricula, Ocorrencia
 
 
 @admin.register(Turma)

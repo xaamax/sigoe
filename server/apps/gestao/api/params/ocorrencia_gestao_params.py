@@ -1,7 +1,7 @@
 from drf_spectacular.utils import OpenApiParameter
 from drf_spectacular.types import OpenApiTypes
 
-DASHBOARD_OCORRENCIAS_PARAMETROS = [
+OCORRENCIAS_DASHBOARD_PARAMETROS = [
     OpenApiParameter(
         name="ano_letivo",
         type=OpenApiTypes.INT,

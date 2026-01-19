@@ -1,23 +1,5 @@
 from rest_framework import serializers
-from .models import Turma, Aluno, Matricula, Ocorrencia
-
-
-class TurmaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Turma
-        fields = '__all__'
-
-
-class AlunoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Aluno
-        fields = '__all__'
-
-
-class MatriculaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Matricula
-        fields = '__all__'
+from apps.gestao.models import Ocorrencia
 
 
 class OcorrenciaSerializer(serializers.ModelSerializer):
@@ -76,5 +58,5 @@ class OcorrenciaDashboardSerializer(serializers.Serializer):
     ocorrenciasPorTipo = serializers.ListField()
     ocorrenciasPorUe = serializers.ListField()
     ocorrenciasPorTurma = serializers.ListField()
-    rangkingOcorrenciaDres = serializers.ListField()
-    rangkingOcorrenciaUes = serializers.ListField()
+    # rangkingOcorrenciaDres = serializers.ListField()
+    # rangkingOcorrenciaUes = serializers.ListField()

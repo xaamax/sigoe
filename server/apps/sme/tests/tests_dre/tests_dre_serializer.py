@@ -1,5 +1,5 @@
 from apps.sme.api.serializers.dre_sme_serializer import DreSerializer
-from apps.sme.models.dre import Dre
+from apps.sme.models import Dre
 
 
 def test_dre_serializer_output():

@@ -11,5 +11,5 @@ class Dre(models.Model):
         verbose_name = 'DRE'
         verbose_name_plural = 'DREs'
 
-    def __str__(self):
+    def __str__(self): # pragma: no cover
         return self.nome

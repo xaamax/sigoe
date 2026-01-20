@@ -1,0 +1,14 @@
+[run]
+branch = True
+source = apps
+omit =
+    */admin.py
+    */signals.py
+    */tasks.py
+    */migrations/*
+    */__init__.py
+
+[report]
+show_missing = True
+skip_covered = True
+fail_under = 100

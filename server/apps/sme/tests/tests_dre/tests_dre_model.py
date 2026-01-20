@@ -1,5 +1,5 @@
 import pytest
-from apps.sme.models.dre import Dre
+from apps.sme.models import Dre
 
 
 @pytest.mark.django_db

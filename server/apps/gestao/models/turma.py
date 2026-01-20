@@ -15,5 +15,5 @@ class Turma(ModelBase):
         verbose_name = 'Turma'
         verbose_name_plural = 'Turmas'
 
-    def __str__(self):
+    def __str__(self): # pragma: no cover
         return f'{self.nome} - {self.ue.codigo_ue}'

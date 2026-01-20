@@ -1,7 +1,7 @@
 import pytest
 from rest_framework.test import APIClient
 from django.contrib.auth.models import User
-from apps.sme.models.dre import Dre
+from apps.sme.models import Dre
 
 
 @pytest.mark.django_db

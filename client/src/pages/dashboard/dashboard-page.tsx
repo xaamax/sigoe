@@ -4,9 +4,12 @@ import Grid from "@/layouts/grid";
 import { DreSelect } from "@/components/selects/dre-select";
 import { Form } from "@/components/ui/form";
 import { useForm } from "react-hook-form";
-import { DashboardFormValues, dashboardSchema } from "./schema/dashboard-schema";
+import {
+  DashboardFormValues,
+  dashboardSchema,
+} from "./schema/dashboard-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { SelectInputUes } from "@/components/selects/select-input-ues";
+import { UeSelect } from "@/components/selects/ue-select";
 import SelectInput from "@/components/inputs/select-input";
 import dayjs from "dayjs";
 import Box from "@/widgets/box";
@@ -21,16 +24,15 @@ export function Dashboard() {
   const form = useForm<DashboardFormValues>({
     resolver: zodResolver(dashboardSchema),
     defaultValues: {
-      ano_letivo: Number(dayjs().year())
-    }
+      ano_letivo: Number(dayjs().year()),
+    },
   });
 
   const { data } = useGetOcorrenciasDashboard({
-    ano_letivo: form.watch('ano_letivo'),
-    codigo_dre: form.watch('dre'),
-    codigo_ue: form.watch('ue'),
-  })
-
+    ano_letivo: form.watch("ano_letivo"),
+    codigo_dre: form.watch("dre"),
+    codigo_ue: form.watch("ue"),
+  });
 
   return (
     <Content>
@@ -42,44 +44,62 @@ export function Dashboard() {
             label="Ano Letivo"
             placeholder="Selecione o Ano Letivo"
             name="ano_letivo"
-            data={[2026, 2025].map((ano) => ({ label: String(ano), value: ano }))}
+            data={[2026, 2025].map((ano) => ({
+              label: String(ano),
+              value: ano,
+            }))}
             form={form}
           />
           <DreSelect name="dre" form={form} withAsterisk={false} />
-          <SelectInputUes form={form} withAsterisk={false} />
+          <UeSelect name="ue" form={form} withAsterisk={false} />
         </Grid>
       </Form>
 
       <div className="space-y-4 pt-4">
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          <Box title="Ocorrências Registradas" value={data?.data?.totalOcorrencias || 0} icon={TriangleAlert} />
-          <Box title="Aguardando Análise" value={data?.data?.AguardandoAnalise || 0} icon={ClipboardList} />
-          <Box title="Finalizadas" value={data?.data?.Finalizadas || 0} icon={CheckCircle} />
+          <Box
+            title="Ocorrências Registradas"
+            value={data?.data?.totalOcorrencias || 0}
+            icon={TriangleAlert}
+          />
+          <Box
+            title="Aguardando Análise"
+            value={data?.data?.AguardandoAnalise || 0}
+            icon={ClipboardList}
+          />
+          <Box
+            title="Finalizadas"
+            value={data?.data?.Finalizadas || 0}
+            icon={CheckCircle}
+          />
         </div>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
         <div className="col-span-8">
           {!form.watch("dre") && (
-            <OcorrenciasDreChart chartData={data?.data?.ocorrenciasPorDre || []} />
+            <OcorrenciasDreChart
+              chartData={data?.data?.ocorrenciasPorDre || []}
+            />
           )}
 
           {form.watch("dre") && !form.watch("ue") && (
-            <OcorrenciasUeChart chartData={data?.data?.ocorrenciasPorUe || []} />
+            <OcorrenciasUeChart
+              chartData={data?.data?.ocorrenciasPorUe || []}
+            />
           )}
 
           {form.watch("ue") && (
-            <OcorrenciasTurmaChart chartData={data?.data?.ocorrenciasPorTurma || []} />
+            <OcorrenciasTurmaChart
+              chartData={data?.data?.ocorrenciasPorTurma || []}
+            />
           )}
         </div>
         <div className="col-span-4">
-          <OcorrenciaTipoChart chartData={data?.data?.ocorrenciasPorTipo || []} />
+          <OcorrenciaTipoChart
+            chartData={data?.data?.ocorrenciasPorTipo || []}
+          />
         </div>
       </div>
-
-
-
-
-
 
       {/* <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>

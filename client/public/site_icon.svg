@@ -1,0 +1,19 @@
+<svg width="32" height="32" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="purpleGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"></stop>
+      <stop offset="100%" stop-color="#7C3AED"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- Casa -->
+  <path d="M32 6 L6 26 V56 H58 V26 Z" fill="url(#purpleGrad)"></path>
+  
+  <!-- Porta -->
+  <rect x="26" y="36" width="12" height="20" rx="3" fill="#FFFFFF"></rect>
+
+  <!-- Alerta -->
+  <circle cx="44" cy="14" r="8" fill="#FDB515"></circle>
+  <rect x="43" y="9" width="2" height="7" rx="1" fill="#7C3AED"></rect>
+  <circle cx="44" cy="19" r="1.5" fill="#7C3AED"></circle>
+</svg>

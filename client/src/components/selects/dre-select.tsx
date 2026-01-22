@@ -10,10 +10,29 @@ interface Props {
   form?: any;
   isLoading?: boolean;
   className?: string;
+  hideSelectAll?: boolean;
 }
 
 export function DreSelect(props: Props) {
-  const { data, isLoading } = useGetAllDres();
+  const { data = [], isLoading } = useGetAllDres();
 
-  return <SelectInput data={data || []} label={props.label || "Diretoria Regional de Educação (DRE)"} placeholder={props.placeholder || "Selecione a DRE"} isLoading={isLoading} {...props} />;
+  const dres = props.hideSelectAll
+    ? data
+    : [
+        {
+          value: undefined,
+          label: "Todas",
+        },
+        ...data,
+      ];
+
+  return (
+    <SelectInput
+      data={dres}
+      label={props.label || "Diretoria Regional de Educação (DRE)"}
+      placeholder={props.placeholder || "Selecione a DRE"}
+      isLoading={isLoading}
+      {...props}
+    />
+  );
 }

@@ -11,7 +11,7 @@ import SelectInput from "@/components/inputs/select-input";
 import DateInput from "@/components/inputs/date-input";
 import TextareaInput from "@/components/inputs/textarea-input";
 import { DreSelect } from "@/components/selects/dre-select";
-import { SelectInputUes } from "@/components/selects/select-input-ues";
+import { UeSelect } from "@/components/selects/ue-select";
 import {
   SITUACAO_OCORRENCIA_OPTIONS,
   TIPO_OCORRENCIA_OPTIONS,
@@ -37,8 +37,8 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
     shouldUnregister: false,
     defaultValues: {
       situacao: SituacoesOcorrencia.AguardandoAnalise,
-      data_ocorrencia: dayjs().format('YYYY-MM-DD')
-    }
+      data_ocorrencia: dayjs().format("YYYY-MM-DD"),
+    },
   });
 
   const [submitAction, setSubmitAction] = useState<SubmitAction>("save");
@@ -86,8 +86,8 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
         className="space-y-6 px-12 pt-4"
       >
         <Grid cols="12 2 2 2">
-          <DreSelect name="dre" form={form} withAsterisk={true} />
-          <SelectInputUes form={form} withAsterisk={true} />
+          <DreSelect name="dre" form={form} withAsterisk={true} hideSelectAll={true} />
+          <UeSelect name="ue" form={form} withAsterisk={false} hideSelectAll={true} />
           <SelectInputTurmas form={form} withAsterisk={true} />
           <SelectInputMatriculas form={form} />
         </Grid>

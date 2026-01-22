@@ -1,4 +1,4 @@
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 import {
   Card,
@@ -6,28 +6,28 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card"
+} from "@/components/ui/card";
 import {
   ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-} from "@/components/ui/chart"
-import Text from "@/components/commons/text"
+} from "@/components/ui/chart";
+import Text from "@/components/commons/text";
 
 type Props = {
   chartData: {
-    label: string
-    total: number
-  }[]
-}
+    label: string;
+    total: number;
+  }[];
+};
 
 const chartConfig = {
   total: {
     label: "Total de Ocorrências",
     color: "hsl(var(--primary))",
   },
-} satisfies ChartConfig
+} satisfies ChartConfig;
 
 export default function OcorrenciasDreChart({ chartData }: Props) {
   return (
@@ -48,18 +48,27 @@ export default function OcorrenciasDreChart({ chartData }: Props) {
               </Text>
             </div>
           ) : (
-            <BarChart accessibilityLayer data={chartData}>
-              <CartesianGrid vertical={false} />
+            <BarChart
+              accessibilityLayer
+              data={chartData}
+              layout="vertical"
+              margin={{ left: -40 }}
+            >
+              <CartesianGrid horizontal={false} />
 
-              <XAxis
+              <XAxis type="number" dataKey="total" hide />
+
+              <YAxis
+                type="category"
                 dataKey="label"
                 tickLine={false}
                 tickMargin={10}
                 axisLine={false}
+                width={160}
                 tickFormatter={(value: string) =>
                   value
-                    .replace("DIRETORIA REGIONAL DE EDUCACAO ", "")
-                    .slice(0, 12)
+                    .replace("DIRETORIA REGIONAL DE EDUCAÇÃO ", "")
+                    .slice(0, 20)
                 }
               />
 
@@ -71,12 +80,12 @@ export default function OcorrenciasDreChart({ chartData }: Props) {
               <Bar
                 dataKey="total"
                 fill="var(--color-total)"
-                radius={8}
+                radius={6}
               />
             </BarChart>
           )}
         </ChartContainer>
       </CardContent>
     </Card>
-  )
+  );
 }

@@ -7,7 +7,6 @@ class Dre(models.Model):
     abreviacao = models.CharField(max_length=10, verbose_name='Abreviação')
 
     class Meta:
-        db_table = 'dres'
         verbose_name = 'DRE'
         verbose_name_plural = 'DREs'
 

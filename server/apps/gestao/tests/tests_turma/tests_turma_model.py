@@ -33,6 +33,5 @@ def test_criar_turma():
 
 
 def test_meta_turma():
-    assert Turma._meta.db_table == "turmas"
     assert Turma._meta.verbose_name == "Turma"
     assert Turma._meta.verbose_name_plural == "Turmas"

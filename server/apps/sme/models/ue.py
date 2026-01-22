@@ -8,7 +8,6 @@ class Ue(models.Model):
     dre = models.OneToOneField(Dre, on_delete=models.CASCADE, verbose_name='DRE', db_column='codigo_dre')
 
     class Meta:
-        db_table = 'ues'
         verbose_name = 'UE'
         verbose_name_plural = 'UEs'
 

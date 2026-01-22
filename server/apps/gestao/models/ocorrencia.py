@@ -20,7 +20,6 @@ class Ocorrencia(ModelBase):
     )
 
     class Meta:
-        db_table = 'ocorrencias'
         verbose_name = 'Ocorrência'
         verbose_name_plural = 'Ocorrências'
 

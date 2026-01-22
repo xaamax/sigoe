@@ -9,7 +9,6 @@ class Matricula(ModelBase):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE, verbose_name='Aluno')
 
     class Meta:
-        db_table = 'matriculas'
         verbose_name = 'Matrícula'
         verbose_name_plural = 'Matrículas'
 

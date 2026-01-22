@@ -19,7 +19,6 @@ class Aluno(ModelBase):
         return f'{self.logradouro}, {self.numero} - {self.bairro} - {self.cidade}/{self.estado} - {self.cep} '
 
     class Meta:
-        db_table = 'alunos'
         verbose_name = 'Aluno'
         verbose_name_plural = 'Alunos'
 

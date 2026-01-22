@@ -12,6 +12,8 @@ ALLOWED_HOSTS = []
 CORS_ORIGIN_ALLOW_ALL = True
 
 INSTALLED_APPS = [
+    'jazzmin',
+    
     'corsheaders',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -19,8 +21,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    'jazzmin',
 
     'rest_framework',
     'rest_framework_simplejwt',
@@ -63,8 +63,12 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'sigoe',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'sigoe_db',
+        'PORT': '5432'
     }
 }
 
@@ -96,9 +100,9 @@ JAZZMIN_SETTINGS = {
     "site_title": "SIGOE",
     "site_header": "SIGOE",
     "site_brand": "SIGOE",
-    "site_logo": "img/site_logo.svg",
+    "site_logo": "img/site_icon.svg",
     "login_logo": "img/login_logo.svg",
-    "site_logo_classes": "",
+    "site_logo_classes": "img-circle",
     "site_icon": "img/site_icon.svg",
     "welcome_sign": "Bem vindo(a) ao Sistema de Gestão de Ocorrências Escolares!",
     "copyright": "xaamax LTDA",
@@ -141,4 +145,4 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672//'
+CELERY_BROKER_URL = 'amqp://guest:guest@rabbitmq:5672//'

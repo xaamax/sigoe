@@ -44,6 +44,5 @@ def test_endereco_property():
 
 
 def test_meta_aluno():
-    assert Aluno._meta.db_table == "alunos"
     assert Aluno._meta.verbose_name == "Aluno"
     assert Aluno._meta.verbose_name_plural == "Alunos"

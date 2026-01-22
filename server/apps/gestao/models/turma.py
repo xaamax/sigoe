@@ -11,7 +11,6 @@ class Turma(ModelBase):
     ue = models.ForeignKey(Ue, on_delete=models.CASCADE, verbose_name='UE', db_column='codigo_ue')
 
     class Meta:
-        db_table = 'turmas'
         verbose_name = 'Turma'
         verbose_name_plural = 'Turmas'
 

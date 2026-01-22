@@ -1,0 +1,46 @@
+name: app-sigoe
+
+services:
+  sigoe:
+    build: .
+    command: sh -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    restart: always
+    ports:
+      - 8000:8000
+    depends_on:
+      - sigoe_db
+      - rabbitmq
+
+  worker:
+    build: .
+    command: celery -A config worker -l INFO
+    restart: always
+    depends_on:
+      - sigoe_db
+      - rabbitmq
+
+  sigoe_db:
+    image: postgres:15
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=sigoe
+
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+volumes:
+  postgres_data:
+  rabbitmq-data:

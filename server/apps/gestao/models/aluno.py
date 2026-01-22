@@ -15,12 +15,12 @@ class Aluno(ModelBase):
     telefone_responsavel = models.CharField(max_length=15, verbose_name='Responsável Telefone')
 
     @property
-    def endereco(self): # pragma: no cover
+    def endereco(self):  # pragma: no cover
         return f'{self.logradouro}, {self.numero} - {self.bairro} - {self.cidade}/{self.estado} - {self.cep} '
 
     class Meta:
         verbose_name = 'Aluno'
         verbose_name_plural = 'Alunos'
 
-    def __str__(self): # pragma: no cover
+    def __str__(self):  # pragma: no cover
         return self.nome

@@ -11,5 +11,5 @@ class Ue(models.Model):
         verbose_name = 'UE'
         verbose_name_plural = 'UEs'
 
-    def __str__(self): # pragma: no cover
+    def __str__(self):  # pragma: no cover
         return self.nome

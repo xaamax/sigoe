@@ -3,6 +3,7 @@ from django.db import models
 from apps.sme.models import Ue
 from config.model_base import ModelBase
 
+
 class Turma(ModelBase):
     codigo_turma = models.CharField(max_length=10, unique=True, verbose_name='Código')
     nome = models.CharField(max_length=100, verbose_name='Nome')
@@ -14,5 +15,5 @@ class Turma(ModelBase):
         verbose_name = 'Turma'
         verbose_name_plural = 'Turmas'
 
-    def __str__(self): # pragma: no cover
+    def __str__(self):  # pragma: no cover
         return f'{self.nome} - {self.ue.codigo_ue}'

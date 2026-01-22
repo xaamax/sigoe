@@ -4,4 +4,3 @@ from apps.gestao.models import Ocorrencia
 
 class OcorrenciaFilterClass(AutoRQLFilterClass):
     MODEL = Ocorrencia
-

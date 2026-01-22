@@ -3,6 +3,7 @@ from rest_framework.test import APIClient
 from django.contrib.auth.models import User
 from apps.sme.models import Dre, Ue
 
+
 @pytest.mark.django_db
 def test_listar_ues_com_admin():
     client = APIClient()
@@ -31,11 +32,13 @@ def test_listar_ues_com_admin():
     assert response.status_code == 200
     assert response.data[0]["codigo_ue"] == "UE001"
 
+
 @pytest.mark.django_db
 def test_listar_ues_sem_autenticacao():
     client = APIClient()
     response = client.get("/api/v1/sme/ues/")
     assert response.status_code == 403
+
 
 @pytest.mark.django_db
 def test_listar_ues_por_dre():

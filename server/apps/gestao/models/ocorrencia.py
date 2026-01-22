@@ -23,5 +23,5 @@ class Ocorrencia(ModelBase):
         verbose_name = 'Ocorrência'
         verbose_name_plural = 'Ocorrências'
 
-    def __str__(self): # pragma: no cover
+    def __str__(self):  # pragma: no cover
         return self.descricao

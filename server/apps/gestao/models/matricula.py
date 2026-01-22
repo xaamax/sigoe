@@ -12,5 +12,5 @@ class Matricula(ModelBase):
         verbose_name = 'Matrícula'
         verbose_name_plural = 'Matrículas'
 
-    def __str__(self): # pragma: no cover
+    def __str__(self):  # pragma: no cover
         return f'{self.aluno.nome} - {self.turma.nome} - {self.turma.ue.codigo_ue}'

@@ -1,4 +1,4 @@
-from rest_framework.permissions import DjangoModelPermissions, IsAdminUser
+from rest_framework.permissions import DjangoModelPermissions
 from drf_spectacular.utils import extend_schema
 from rest_framework.decorators import action
 from rest_framework import viewsets
@@ -16,6 +16,7 @@ from apps.gestao.api.serializers import (
 )
 
 from apps.gestao.api.services.ocorrencia_gestao_service import OcorrenciasDashboardService
+
 
 class OcorrenciaViewSet(viewsets.ModelViewSet):
     queryset = Ocorrencia.objects.all()

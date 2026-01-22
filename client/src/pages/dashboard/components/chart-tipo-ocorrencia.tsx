@@ -61,7 +61,7 @@ export default function OcorrenciaTipoChart({ chartData }: Props) {
     })
 
     return (
-        <Card className="flex flex-col">
+        <Card className="flex flex-col h-full">
             <CardHeader className="pb-0">
                 <CardTitle>Ocorrências por Tipo</CardTitle>
                 <CardDescription>

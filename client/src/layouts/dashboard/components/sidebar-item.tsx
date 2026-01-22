@@ -6,7 +6,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import useUserPreference from "@/stores/user-preference";
+import useUserPreference from "@/core/stores/user-preference";
 import { useNavigate, useMatch, useLocation } from "react-router-dom";
 import {
   Popover,

@@ -74,8 +74,8 @@ export function Dashboard() {
           />
         </div>
       </div>
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12">
-        <div className="col-span-8">
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-12 items-strech">
+        <div className="col-span-8 h-full">
           {!form.watch("dre") && (
             <OcorrenciasDreChart
               chartData={data?.data?.ocorrenciasPorDre || []}

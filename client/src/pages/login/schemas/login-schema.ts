@@ -1,4 +1,4 @@
-import { requiredString } from "@/helpers/form-schemas-validators";
+import { requiredString } from "@/core/helpers/form-schemas-validators";
 import { z } from "zod";
 
 export const loginSchema = z.object({

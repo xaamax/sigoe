@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import clsx from "clsx";
 import { Header, Sidebar } from "./components";
-import useUserPreference from "@/stores/user-preference";
+import useUserPreference from "@/core/stores/user-preference";
 import { IdleTimerProvider } from "react-idle-timer";
 import { useModal } from "@saimin/react-modal-manager";
 import IdleConfirmation from "@/components/modals/idle-confirmation";

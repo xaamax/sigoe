@@ -16,7 +16,7 @@ import { Moon, PanelLeft, Sun } from "lucide-react";
 import { VisuallyHidden } from "@radix-ui/react-visually-hidden";
 import menus from "@/configs/menus";
 import SidebarItem from "./sidebar-item";
-import useUserPreference from "@/stores/user-preference";
+import useUserPreference from "@/core/stores/user-preference";
 import clsx from "clsx";
 import { useTheme } from "@/components/theme/theme-provider";
 import SearchInput from "@/components/inputs/search-input";

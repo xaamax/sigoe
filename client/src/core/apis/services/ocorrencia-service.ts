@@ -1,4 +1,4 @@
-import { get, post, put, type ApiResult } from "./api";
+import { get, post, put, remove, type ApiResult } from "./api";
 import { URL_GESTAO_OCORRENCIAS } from "../../constants/urls";
 import type { SalvarOcorrenciaDTO, OcorrenciaRegistroDTO, OcorrenciaDTO, OcorrenciaDashboardDTO } from "../../dto/ocorrencia-dto";
 
@@ -23,3 +23,6 @@ export const submitOcorrencia = async (payload: SalvarOcorrenciaDTO) => {
     ? post<SalvarOcorrenciaDTO>(url, payload)
     : put<SalvarOcorrenciaDTO>(url, payload)
 }
+
+export const excluirOcorrencia = (id: number) =>
+  remove(`${URL_GESTAO_OCORRENCIAS}${id}/`);    

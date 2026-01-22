@@ -1,6 +1,6 @@
 import { LibraryBig } from "lucide-react";
 import Text from "@/components/commons/text";
-import useUserPreference from "@/stores/user-preference";
+import useUserPreference from "@/core/stores/user-preference";
 import clsx from "clsx";
 
 function SidebarHeader() {

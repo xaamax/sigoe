@@ -3,7 +3,7 @@ import menus from "@/configs/menus";
 import SidebarHeader from "./sidebar-header";
 import SidebarFooter from "./sidebar-footer";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import useUserPreference from "@/stores/user-preference";
+import useUserPreference from "@/core/stores/user-preference";
 import clsx from "clsx";
 
 export function Sidebar() {

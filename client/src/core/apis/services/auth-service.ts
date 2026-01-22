@@ -1,6 +1,6 @@
 import type { AxiosResponse } from "axios";
 import api from "./api";
-import { closeAuth } from "@/hooks/use-auth-operations";
+import { closeAuth } from "@/core/hooks/use-auth-operations";
 
 export const URL_REFRESH_TOKEN = "/v1/authentication/refresh-token/";
 

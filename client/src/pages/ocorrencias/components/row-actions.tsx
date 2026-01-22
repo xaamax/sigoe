@@ -11,12 +11,23 @@ import {
 import { Edit2, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { OcorrenciaRegistroDTO } from "@/core/dto/ocorrencia-dto";
+import ModalExcluirOcorrencia from "./modal-excluir-ocorrencia";
 
 type Props = {
   row: OcorrenciaRegistroDTO;
+  onConfirm?: () => void;
 };
 
-export function DataTableRowActions({ row }: Props) {
+export function DataTableRowActions({ row, onConfirm }: Props) {
+
+// const handleExcluirOcorrencia = () => {
+//     open("excluir-ocorrencia", {
+//       content: <ModalExcluirOcorrencia onConfirm={authService.logout} />,
+//       animationType: "zoom",
+//     });
+//   };
+
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>

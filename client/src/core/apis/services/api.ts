@@ -9,7 +9,7 @@ import type { ResponseBaseDTO } from "@/core/dto/response-base-dto";
 import { dayjs } from "@/core/date/dayjs";
 import { toast } from "sonner";
 import authService, { URL_REFRESH_TOKEN } from "./auth-service";
-import { getAuth, setAuth } from "@/hooks/use-auth-operations";
+import { getAuth, setAuth } from "@/core/hooks/use-auth-operations";
 
 const api = axios.create({
   baseURL: import.meta.env.VITE_SME_SIGOE_API,

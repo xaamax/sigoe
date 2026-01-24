@@ -2,7 +2,7 @@ import PageTitle from "@/components/commons/page-title";
 import { Content } from "@/layouts/content";
 import { useParams } from "react-router-dom";
 import { OcorrenciaForm } from "./components/ocorrencia-form";
-import { useGetOcorrenciaPorId } from "@/core/apis/queries/ocorrencias";
+import { useGetOcorrenciaPorId } from "@/core/apis/queries/ocorrencias-query";
 
 export function OcorrrenciaDetalhes() {
   const { id } = useParams();

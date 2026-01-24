@@ -15,7 +15,6 @@ export function SelectInputTurmas({ form, withAsterisk }: Props) {
 
   return (
     <SelectInput
-      type="number"
       isLoading={isLoading}
       label="Turma"
       placeholder="Selecione a Turma"

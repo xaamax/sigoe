@@ -5,7 +5,7 @@ import { DreDTO, getDres, getUesPorDre, UeDTO } from "../services/sme-service";
 export function useGetAllDres() {
   return useQuery({
     queryKey: dreKeys.filters({}),
-    queryFn: () => getDres(),
+    queryFn: getDres,
     select: (data) =>
       data.data?.map((dre: DreDTO) => ({
         value: dre.codigo_dre,

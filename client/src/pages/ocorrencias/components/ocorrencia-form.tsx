@@ -86,8 +86,18 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
         className="space-y-6 px-12 pt-4"
       >
         <Grid cols="12 2 2 2">
-          <DreSelect name="dre" form={form} withAsterisk={true} hideSelectAll={true} />
-          <UeSelect name="ue" form={form} withAsterisk={false} hideSelectAll={true} />
+          <DreSelect
+            name="dre"
+            form={form}
+            withAsterisk={true}
+            hideSelectAll={true}
+          />
+          <UeSelect
+            name="ue"
+            form={form}
+            withAsterisk={false}
+            hideSelectAll={true}
+          />
           <SelectInputTurmas form={form} withAsterisk={true} />
           <SelectInputMatriculas form={form} />
         </Grid>
@@ -100,17 +110,18 @@ export const OcorrenciaForm = ({ defaultValues }: FormProps) => {
             form={form}
           />
           <SelectInput
-            type="number"
             label="Tipo"
             placeholder="Selecione o tipo"
             name="tipo"
-            data={TIPO_OCORRENCIA_OPTIONS}
+            data={TIPO_OCORRENCIA_OPTIONS.map(({ label, value }) => ({
+              label,
+              value: String(value),
+            }))}
             withAsterisk
             form={form}
           />
           {defaultValues?.id && (
             <SelectInput
-              type="number"
               label="Situação"
               placeholder="Selecione a situação"
               name="situacao"

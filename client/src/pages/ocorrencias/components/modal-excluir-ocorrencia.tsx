@@ -12,15 +12,16 @@ function ModalExcluirOcorrencia({ onConfirm }: Props) {
   const handleCancel = () => {
     close("excluir-ocorrencia");
   };
-
+  
   const handleLogout = () => {
     onConfirm();
+    close("excluir-ocorrencia");
   };
 
   return (
     <div className="w-[400px] rounded-lg overflow-hidden bg-background p-4">
       <Text size="lg">
-        <b>Tem certeza de que deseja excluir a ocorrência?</b>
+        <b>Confirma a exclusão da ocorrência?</b>
       </Text>
 
       <br />

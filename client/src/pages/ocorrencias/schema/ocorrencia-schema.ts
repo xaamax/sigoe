@@ -9,8 +9,8 @@ export const ocorrenciaSchema = z.object({
     }),
   dre: z.string({ required_error: "(*) Campo obrigatório" }),
   ue: z.string({ required_error: "(*) Campo obrigatório" }),
-  tipo: z.number({ required_error: "(*) Campo obrigatório" }),
-  situacao: z.number({ required_error: "(*) Campo obrigatório" }),
+  tipo: z.coerce.number({ required_error: "(*) Campo obrigatório" }),
+  situacao: z.coerce.number({ required_error: "(*) Campo obrigatório" }),
   descricao: z
     .string()
     .min(1, {
@@ -19,8 +19,8 @@ export const ocorrenciaSchema = z.object({
     .min(3, {
       message: "(*) Mínimo 3 caracteres",
     }),
-  turma: z.number({ required_error: "(*) Campo obrigatório" }),
-  matricula: z.number({ required_error: "(*) Campo obrigatório" }),
+  turma: z.coerce.number({ required_error: "(*) Campo obrigatório" }),
+  matricula: z.coerce.number({ required_error: "(*) Campo obrigatório" }),
 });
 export type OcorrenciaFormValues = z.infer<typeof ocorrenciaSchema>;
 

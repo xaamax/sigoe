@@ -19,7 +19,7 @@ export function useGetOcorrenciasDashboard(filters: {
 export function useGetAllOcorrencias(filters = {}) {
   return useQuery({
     queryKey: ocorrenciaKeys.list(filters),
-    queryFn: () => getOcorrencias(),
+    queryFn: getOcorrencias,
   });
 }
 

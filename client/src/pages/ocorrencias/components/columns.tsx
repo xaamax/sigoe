@@ -2,107 +2,112 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { DataTableRowActions } from "./row-actions";
 import { OcorrenciaRegistroDTO } from "@/core/dto/ocorrencia-dto";
-import { ColumnDef } from "@tanstack/react-table";
+import { ColumnDef, Row } from "@tanstack/react-table";
 import dayjs from "dayjs";
 
-export const columns : ColumnDef<OcorrenciaRegistroDTO>[] = [
+export const columns = (
+  _?: (index: number) => void,
+  toogleRefreshTable?: () => void,
+): ColumnDef<OcorrenciaRegistroDTO>[] => [
   {
     id: "select",
-    header: ({ table }: any) => (
+    header: ({ table }) => (
       <Checkbox
         checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
+          table.getIsAllPageRowsSelected()
+            ? true
+            : table.getIsSomePageRowsSelected()
+              ? "indeterminate"
+              : false
         }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
+        onCheckedChange={(value) =>
+          table.toggleAllPageRowsSelected(Boolean(value))
+        }
+        aria-label="Selecionar todos"
         className="translate-y-[2px]"
       />
     ),
-    cell: ({ row }: any) => (
+    cell: ({ row }) => (
       <Checkbox
         checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
+        onCheckedChange={(value) => row.toggleSelected(Boolean(value))}
+        aria-label="Selecionar linha"
         className="translate-y-[2px]"
       />
     ),
     enableSorting: false,
+    enableHiding: false,
   },
+
   {
     accessorKey: "data_ocorrencia",
-    header: ({ column }: any) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Data da ocorrência" />
     ),
-    cell: ({ row }: any) => {
-      return (
-        <div>{dayjs(row.getValue("data_ocorrencia")).format("DD/MM/YYYY")}</div>
-      );
-    },
+    cell: ({ row }) => (
+      <div>
+        {dayjs(row.getValue<string>("data_ocorrencia")).format("DD/MM/YYYY")}
+      </div>
+    ),
   },
+
   {
     accessorKey: "tipo",
-    header: ({ column }: any) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Tipo" />
     ),
-    cell: ({ row }: any) => {
-      return <div>{row.getValue("tipo")}</div>;
-    },
-    filterFn: (row: any, id: any, value: any) => {
-      return value.includes(row.getValue(id));
-    },
+    cell: ({ row }) => <div>{row.getValue("tipo")}</div>,
+    filterFn: (row: Row<OcorrenciaRegistroDTO>, id, value: string[]) =>
+      value.includes(row.getValue(id)),
   },
+
   {
     accessorKey: "dre",
-    header: ({ column }: any) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title="DRE" />
     ),
-    cell: ({ row }: any) => {
-      return <div>{row.getValue("dre")}</div>;
-    },
-    filterFn: (row: any, id: any, value: any) => {
-      return value.includes(row.getValue(id));
-    },
+    cell: ({ row }) => <div>{row.getValue("dre")}</div>,
+    filterFn: (row: Row<OcorrenciaRegistroDTO>, id, value: string[]) =>
+      value.includes(row.getValue(id)),
   },
+
   {
     accessorKey: "ue",
-    header: ({ column }: any) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title="UE" />
     ),
-    cell: ({ row }: any) => {
-      return <div>{row.getValue("ue")}</div>;
-    },
-    filterFn: (row: any, id: any, value: any) => {
-      return value.includes(row.getValue(id));
-    },
+    cell: ({ row }) => <div>{row.getValue("ue")}</div>,
+    filterFn: (row: Row<OcorrenciaRegistroDTO>, id, value: string[]) =>
+      value.includes(row.getValue(id)),
   },
+
   {
     accessorKey: "aluno",
-    header: ({ column }: any) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Aluno" />
     ),
-    cell: ({ row }: any) => {
-      return <div>{row.getValue("aluno")}</div>;
-    },
-    filterFn: (row: any, id: any, value: any) => {
-      return value.includes(row.getValue(id));
-    },
+    cell: ({ row }) => <div>{row.getValue("aluno")}</div>,
+    filterFn: (row: Row<OcorrenciaRegistroDTO>, id, value: string[]) =>
+      value.includes(row.getValue(id)),
   },
+
   {
     accessorKey: "situacao",
-    header: ({ column }: any) => (
+    header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Situação" />
     ),
-    cell: ({ row }: any) => {
-      return <div>{row.getValue("situacao")}</div>;
-    },
-    filterFn: (row: any, id: any, value: any) => {
-      return value.includes(row.getValue(id));
-    },
+    cell: ({ row }) => <div>{row.getValue("situacao")}</div>,
+    filterFn: (row: Row<OcorrenciaRegistroDTO>, id, value: string[]) =>
+      value.includes(row.getValue(id)),
   },
 
   {
     id: "actions",
-    cell: ({ row }: any) => <DataTableRowActions row={row.original} />,
+    cell: ({ row }) => (
+      <DataTableRowActions
+        row={row.original}
+        {...{ toogleRefreshTable }}
+      />
+    ),
   },
 ];

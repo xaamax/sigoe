@@ -14,7 +14,7 @@ import SelectInput from "@/components/inputs/select-input";
 import dayjs from "dayjs";
 import Box from "@/widgets/box";
 import { CheckCircle, ClipboardList, TriangleAlert } from "lucide-react";
-import { useGetOcorrenciasDashboard } from "@/core/apis/queries/ocorrencias";
+import { useGetOcorrenciasDashboard } from "@/core/apis/queries/ocorrencias-query";
 import OcorrenciaTipoChart from "./components/chart-tipo-ocorrencia";
 import OcorrenciasDreChart from "./components/chart-ocorrencia-dre";
 import OcorrenciasUeChart from "./components/chart-ocorrencia-ue";

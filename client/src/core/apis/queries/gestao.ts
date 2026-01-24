@@ -9,7 +9,7 @@ export function useGetAllTurmasByUe(codigo_ue: string) {
     enabled: !!codigo_ue,
     select: (data) =>
       data.data?.map((turma: TurmaDTO) => ({
-        value: turma.id,
+        value: String(turma.id),
         label: turma.nome,
       })),
   });
@@ -22,7 +22,7 @@ export function useGetAllMatriculasByTurma(turma_id: number) {
     enabled: !!turma_id,
     select: (data) =>
       data.data?.map((aluno: AlunoDTO) => ({
-        value: aluno.id,
+        value: String(aluno.id),
         label: aluno.nome,
       })),
   });

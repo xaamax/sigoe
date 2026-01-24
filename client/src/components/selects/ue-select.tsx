@@ -17,14 +17,14 @@ interface Props {
 export function UeSelect(props: Props) {
   const dre = props.form.watch("dre");
 
-  const { data = [], isLoading } = useGetAllUesByDre(dre ?? undefined);
+  const { data = [], isLoading } = useGetAllUesByDre(dre ?? "todas");
 
   const ues =
-    !props.hideSelectAll && dre === undefined
+    !props.hideSelectAll && dre === "todas"
       ? data
       : [
           {
-            value: undefined,
+            value: "todas",
             label: "Todas",
           },
           ...data,
@@ -32,7 +32,7 @@ export function UeSelect(props: Props) {
 
   useEffect(() => {
     if (!props.hideSelectAll && !dre) {
-      props.form.setValue("ue", undefined);
+      props.form.setValue("ue", "todas");
     }
   }, [dre, props.form, props.hideSelectAll]);
 

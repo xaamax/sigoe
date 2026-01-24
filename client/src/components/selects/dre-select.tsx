@@ -20,7 +20,7 @@ export function DreSelect(props: Props) {
     ? data
     : [
         {
-          value: undefined,
+          value: "todas",
           label: "Todas",
         },
         ...data,

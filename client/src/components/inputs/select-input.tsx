@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/select";
 
 interface Props {
-  type?: string;
   label?: string;
   placeholder?: string;
   description?: string;
@@ -25,11 +24,9 @@ interface Props {
   form?: any;
   isLoading?: boolean;
   className?: string;
-  disabled?: boolean; 
 }
 
 function SelectInput({
-  type,
   label,
   placeholder,
   withAsterisk = false,
@@ -39,7 +36,6 @@ function SelectInput({
   form,
   isLoading = false,
   className,
-  disabled
 }: Props) {
   return (
     <FormField
@@ -49,23 +45,19 @@ function SelectInput({
         <FormItem>
           {(label || withAsterisk) && (
             <FormLabel className="flex items-center gap-1">
-              {withAsterisk && <span className="mt-1 text-destructive">*</span>}
               {label}{" "}
+              {withAsterisk && <span className="mt-1 text-destructive">*</span>}
             </FormLabel>
           )}
           <Select
-            value={field.value ?? ""}
-            disabled={isLoading || disabled}
-            onValueChange={(value) => {
-              const parsed = type === "number" ? Number(value) : value;
-
-              field.onChange(parsed);
-            }}
+            disabled={isLoading}
+            onValueChange={field.onChange}
+            value={field.value}
           >
             <FormControl>
               <SelectTrigger className={className}>
                 {isLoading ? (
-                  "carregando..."
+                  "loading..."
                 ) : (
                   <SelectValue placeholder={placeholder} />
                 )}

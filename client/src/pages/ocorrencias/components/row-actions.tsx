@@ -11,22 +11,27 @@ import {
 import { Edit2, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { OcorrenciaRegistroDTO } from "@/core/dto/ocorrencia-dto";
+import { excluirOcorrencia } from "@/core/apis/services/ocorrencia-service";
 import ModalExcluirOcorrencia from "./modal-excluir-ocorrencia";
+import { useModal } from "@saimin/react-modal-manager";
 
 type Props = {
   row: OcorrenciaRegistroDTO;
-  onConfirm?: () => void;
+  toogleRefreshTable?: () => void;
 };
 
-export function DataTableRowActions({ row, onConfirm }: Props) {
+export function DataTableRowActions({ row, toogleRefreshTable }: Props) {
+  const { open } = useModal();
 
-// const handleExcluirOcorrencia = () => {
-//     open("excluir-ocorrencia", {
-//       content: <ModalExcluirOcorrencia onConfirm={authService.logout} />,
-//       animationType: "zoom",
-//     });
-//   };
+  const handleExcluirOcorrencia = () =>
+    excluirOcorrencia(row.id).then(() => toogleRefreshTable?.());
 
+  const modalOcorrencia = () => {
+    open("excluir-ocorrencia", {
+      content: <ModalExcluirOcorrencia onConfirm={handleExcluirOcorrencia} />,
+      animationType: "zoom",
+    });
+  };
 
   return (
     <DropdownMenu>
@@ -49,7 +54,7 @@ export function DataTableRowActions({ row, onConfirm }: Props) {
           </DropdownMenuItem>
         </Link>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={modalOcorrencia}>
           Excluir
           <DropdownMenuShortcut>
             <Trash2 className="h-4 w-4 text-red-500" />
